@@ -1,0 +1,9 @@
+.input-with-placeholder {
+  border-color: #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #969799;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
