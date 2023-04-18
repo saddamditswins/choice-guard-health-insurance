@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepThreeState } from "../../Redux/itemsSlice";
+import { setFieldsValues } from "../../Redux/itemsSlice";
 import CustomInput from "../../features/custom-input/CustomInput";
 import { Field, Formik, useFormikContext } from "formik";
 import CustomSelect from "../../features/custom-select/CustomSelect";
@@ -18,13 +18,11 @@ import "../../../src/assets/scss/common.scss";
           { value: "option5", label: "5 - Very Important" },
         ];
         const [showTravelOptions, setShowTravelOptions] = useState(false);
-        const { stepThree } = useAppSelector((state) => state.item);
+        // const { setFieldsValues } = useAppSelector((state) => state.item);
         const dispatch = useAppDispatch();
         return (
           <>
-            <Text
-              className="text-box"
-            >
+            <Text className="text-box">
               <span>
                 Over-the-Counter: Allowance for things like aspirins, Tylenols, and
                 even toothpaste!
@@ -36,10 +34,10 @@ import "../../../src/assets/scss/common.scss";
               className="custom-select"
               placeholder="Please select a job"
               validate={validate}
-              onClick={(v) => {
-                dispatch(setStepThreeState({ Over: v.target.value }));
+              onClick={(e) => {
+                dispatch(setFieldsValues({ Over: e.target.value }));
               }}
-              defaultValue={stepThree.Over}
+              // defaultValue={setFieldsValues.Over}
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -47,16 +45,12 @@ import "../../../src/assets/scss/common.scss";
                 </option>
               ))}{" "}
             </CustomSelect>
-            {stepThree.errors?.Over && (
-              <p
-                className="validation-error"
-              >
-                {stepThree.errors?.Over}
+            {setFieldsValues?.errors?.Over && (
+              <p className="validation-error">
+                {setFieldsValues?.errors?.Over}
               </p>
             )}
-            <Text
-              className="text-box"
-            >
+            <Text className="text-box">
               <span>
                 {" "}
                 Utilities Flex Card: Allowance for utility bills
@@ -68,10 +62,15 @@ import "../../../src/assets/scss/common.scss";
               placeholder="Please select a job"
               validate={validate}
               className="custom-select"
-              onClick={(v) => {
-                dispatch(setStepThreeState({ Utilities: v.target.value }));
-              }}
-              defaultValue={stepThree.Utilities}
+              // onClick={(v) => {
+              //   dispatch(setFieldsValues({ Utilities: v.target.value }));
+              // }}
+              onClick={
+                (e) => {
+                dispatch(setFieldsValues({ Utilities: e.target.value }));
+              }
+            }
+              // defaultValue={setFieldsValues.Utilities}
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -79,16 +78,12 @@ import "../../../src/assets/scss/common.scss";
                 </option>
               ))}{" "}
             </CustomSelect>
-            {stepThree.errors?.Utilities && (
-              <p
-                className="validation-error"
-              >
-                {stepThree.errors?.Utilities}
+            {setFieldsValues?.errors?.Utilities && (
+              <p className="validation-error">
+                {setFieldsValues?.errors?.Utilities}
               </p>
             )}
-            <Text
-              className="text-box"
-            >
+            <Text className="text-box">
               <span>
                 {" "}
                 Transportation: Coverage for rides to and from plan-approved location
@@ -100,10 +95,13 @@ import "../../../src/assets/scss/common.scss";
               name="Transportation"
               placeholder="Please select a job"
               validate={validate}
-              onClick={(v) => {
-                dispatch(setStepThreeState({ Transportation: v.target.value }));
+              // onClick={(v) => {
+              //   dispatch(setFieldsValues({ Transportation: v.target.value }));
+              // }}
+              onClick={(e) => {
+                dispatch(setFieldsValues({ Transportation: e.target.value }));
               }}
-              defaultValue={stepThree.Transportation}
+              // defaultValue={setFieldsValues.Transportation}
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -111,16 +109,12 @@ import "../../../src/assets/scss/common.scss";
                 </option>
               ))}{" "}
             </CustomSelect>
-            {stepThree.errors?.Transportation && (
-              <p
-                className="validation-error"
-              >
-                {stepThree.errors?.Transportation}
+            {setFieldsValues?.errors?.Transportation && (
+              <p className="validation-error">
+                {setFieldsValues?.errors?.Transportation}
               </p>
             )}
-            <Text
-              className="text-box"
-            >
+            <Text className="text-box">
               <span>
                 {" "}
                 Emergency Response System: Devise that may detect falls and call for
@@ -133,10 +127,13 @@ import "../../../src/assets/scss/common.scss";
               name="Emergency"
               placeholder="Please select a job"
               validate={validate}
-              onClick={(v) => {
-                dispatch(setStepThreeState({ Emergency: v.target.value }));
+              // onClick={(v) => {
+              //   dispatch(setFieldsValues({ Emergency: v.target.value }));
+              // }}
+              onClick={(e) => {
+                dispatch(setFieldsValues({ Emergency: e.target.value }));
               }}
-              defaultValue={stepThree.Emergency}
+              // defaultValue={setFieldsValues.Emergency}
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -144,24 +141,18 @@ import "../../../src/assets/scss/common.scss";
                 </option>
               ))}{" "}
             </CustomSelect>
-            {stepThree.errors?.Emergency && (
-              <p
-                className="validation-error"
-              >
-                {stepThree.errors?.Emergency}
+            {setFieldsValues?.errors?.Emergency && (
+              <p className="validation-error">
+                {setFieldsValues?.errors?.Emergency}
               </p>
             )}
-            <Text
-              className="text-box"
-            >
+            <Text className="text-box">
               Do you travel outside the USA?
             </Text>
             <Field validate={validate}>
               {({ field, form }) => (
                 <>
-                  <div
-                    className="div-wrapper"
-                  >
+                  <div className="div-wrapper">
                       <div className="div-wrapper">
                       <div className="align-radio"> 
                         <Radio
@@ -169,31 +160,28 @@ import "../../../src/assets/scss/common.scss";
                           className="radio-button"
                           name="travel"
                           value="yes"
-                          defaultValue={stepThree.USA}
+                          // defaultValue={setFieldsValues.USA}
                           onClick={(v) => {
                             form.setFieldValue("travel", "yes");
                             setShowTravelOptions(true);
                             console.log(v.target.value);
-                            dispatch(setStepThreeState({ USA: v.target.value }));
+                            dispatch(setFieldsValues({ USA: v.target.value }));
                           }}
                         />
-                        <Text
-                          className="radio-text"
-                        >
+                        <Text className="radio-text">
                           Yes
                         </Text>
                       </div>
       
-                      <div className="align-radio"> 
-                      
+                      <div className="align-radio">
                         <Radio
                           className="radio-button"
                           name="travel"
                           value="no"
-                          onChange={(v) => {
+                          onClick={(v) => {
                             form.setFieldValue("travel", "no");
                             console.log(v.target.value);
-                            dispatch(setStepThreeState({ USA: v.target.value }));
+                            dispatch(setFieldsValues({ USA: v.target.value }));
                             setShowTravelOptions(false);
                           }}
                         />
@@ -202,7 +190,6 @@ import "../../../src/assets/scss/common.scss";
                         </Text>
                       </div>
                     </div>
-      
                   </div>
       
                   <TransitionGroup>
@@ -221,9 +208,7 @@ import "../../../src/assets/scss/common.scss";
                           }
                         >
                           <div className="align-paragraph">
-                            <Text
-                              className="text-box"
-                            >
+                            <Text className="text-box">
                               World Wide Coverage: Coverage for health emergencies
                               around the world
                               <span className="color-red">*</span>{" "}
@@ -235,10 +220,10 @@ import "../../../src/assets/scss/common.scss";
                               validate={validate}
                               onClick={(v) => {
                                 dispatch(
-                                  setStepThreeState({ world: v.target.value })
+                                  setFieldsValues({ world: v.target.value })
                                 );
                               }}
-                              defaultValue={stepThree.world}
+                              // defaultValue={setFieldsValues.world}
                             >
                               {options.map((option) => (
                                 <option key={option.value} value={option.value}>

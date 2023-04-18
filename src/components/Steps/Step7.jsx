@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepSevenState } from "../../Redux/itemsSlice";
+import { setFieldsValues  } from "../../Redux/itemsSlice";
 import { MultiSelect, Text, Divider, Radio, Popover, Button } from "@mantine/core";
 import { Field } from "formik";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -65,10 +65,10 @@ const StepSeven = ({ validate }) => {
                       name="Plan1"
                       value="yes"
                       required
-                      defaultValue={stepSeven.preferable}
+                      // defaultValue={stepSeven.preferable}
                       onClick={(v) => {
                         dispatch(
-                          setStepSevenState({ preferable: v.target.value })
+                          setFieldsValues({ preferable: v.target.value })
                         );
                       }}
                     />
@@ -91,10 +91,10 @@ const StepSeven = ({ validate }) => {
                       name="Plan1"
                       label=""
                       value="no"
-                      defaultValue={stepSeven.preferable}
+                      // defaultValue={stepSeven.preferable}
                       onClick={(v) => {
                         dispatch(
-                          setStepSevenState({ preferable: v.target.value })
+                          setFieldsValues({ preferable: v.target.value })
                         );
                       }}
                       required
@@ -120,10 +120,10 @@ const StepSeven = ({ validate }) => {
                       name="Plan1"
                       label=""
                       value="notsure"
-                      defaultValue={stepSeven.preferable}
+                      // defaultValue={stepSeven.preferable}
                       onClick={(v) => {
                         dispatch(
-                          setStepSevenState({ preferable: v.target.value })
+                          setFieldsValues({ preferable: v.target.value })
                         );
                       }}
                       required
@@ -166,9 +166,9 @@ const StepSeven = ({ validate }) => {
                       {...field}
                       id="travel1"
                       name="Plan2"
-                      defaultValue={stepSeven.network}
+                      // defaultValue={stepSeven.network}
                       onClick={(v) => {
-                        dispatch(setStepSevenState({ network: v.target.value }));
+                        dispatch(setFieldsValues({ network: v.target.value }));
                       }}
                       value="yes"
                       required
@@ -193,10 +193,10 @@ const StepSeven = ({ validate }) => {
                       name="Plan2"
                       label=""
                       value="no"
-                      defaultValue={stepSeven.important}
+                      // defaultValue={stepSeven.important}
                       onClick={(v) => {
                         dispatch(
-                          setStepSevenState({ important: v.target.value })
+                          setFieldsValues({ important: v.target.value })
                         );
                       }}
                       required
@@ -220,9 +220,9 @@ const StepSeven = ({ validate }) => {
                     id="travel3"
                     name="Plan2"
                     label="No preference "
-                    defaultValue={stepSeven.network}
+                    // defaultValue={stepSeven.network}
                     onClick={(v) => {
-                      dispatch(setStepSevenState({ network: v.target.value }));
+                      dispatch(setFieldsValues({ network: v.target.value }));
                     }}
                     value="notsure"
                     required
@@ -288,10 +288,10 @@ const StepSeven = ({ validate }) => {
                                     form.setFieldValue("travel", "yes");
                                     setShowTravelOptions1(false);
                                   }}
-                                  defaultValue={stepSeven.network}
+                                  // defaultValue={stepSeven.network}
                                   onClick={(v) => {
                                     dispatch(
-                                      setStepSevenState({
+                                      setFieldsValues({
                                         network: v.target.value,
                                       })
                                     );
@@ -325,10 +325,10 @@ const StepSeven = ({ validate }) => {
                                     form.setFieldValue("travel", "no");
                                     setShowTravelOptions1(true);
                                   }}
-                                  defaultValue={stepSeven.network}
+                                  // defaultValue={stepSeven.network}
                                   onClick={(v) => {
                                     dispatch(
-                                      setStepSevenState({
+                                      setFieldsValues({
                                         network: v.target.value,
                                       })
                                     );
@@ -451,10 +451,10 @@ const StepSeven = ({ validate }) => {
                                     form.setFieldValue("travel", "yes");
                                     setShowTravelOptions(false);
                                   }}
-                                  defaultValue={stepSeven.network}
+                                  // defaultValue={stepSeven.network}
                                   onClick={(v) => {
                                     dispatch(
-                                      setStepSevenState({
+                                      setFieldsValues({
                                         network: v.target.value,
                                       })
                                     );
@@ -489,10 +489,10 @@ const StepSeven = ({ validate }) => {
                                     form.setFieldValue("travel", "no");
                                     setShowTravelOptions(true);
                                   }}
-                                  defaultValue={stepSeven.network}
+                                  // defaultValue={stepSeven.network}
                                   onClick={(v) => {
                                     dispatch(
-                                      setStepSevenState({
+                                      setFieldsValues({
                                         network: v.target.value,
                                       })
                                     );

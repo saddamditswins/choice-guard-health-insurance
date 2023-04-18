@@ -101,7 +101,7 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
             boxSizing: "border-box",
             maxWidth: "100%",
           }}
-          defaultValue={stepOne.Zipcode}
+          // defaultValue={stepOne.Zipcode}
 
           name="Zipcode"
           type="text"

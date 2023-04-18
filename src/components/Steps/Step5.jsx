@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepFiveState } from "../../Redux/itemsSlice";
+import { setFieldsValues } from "../../Redux/itemsSlice";
 import { MultiSelect, Text, TextInput } from "@mantine/core";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const StepFive = ({ validate, chronic }) => {
-    const { field, stepFour } = useAppSelector((state) => state.item);
+    const { stepFive,field } = useAppSelector((state) => state.item);
     const dispatch = useAppDispatch();
+    // const { stepFour } = useAppSelector((state) => state.item);
   
     const [selectedItems, setSelectedItems] = useState([]);
   
@@ -167,8 +168,8 @@ const StepFive = ({ validate, chronic }) => {
                       type="text"
                       validate={validate}
                       placeholder={`Enter option for ${item}`}
-                      onChange={(v) => {
-                        dispatch(setStepFiveState({ Zipcode: v.target.value }));
+                      onBlur={(v) => {
+                        dispatch(setFieldsValues({ Zipcode: v.target.value }));
                       }}
                     />
                   </div>

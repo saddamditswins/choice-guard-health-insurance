@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepTwoState } from "../../Redux/itemsSlice";
+import { setFieldsValues } from "../../Redux/itemsSlice";
 import CustomInput from "../../features/custom-input/CustomInput";
 import CustomSelect from "../../features/custom-select/CustomSelect";
 import { Text, Divider } from "@mantine/core";
@@ -15,9 +15,9 @@ const StepTwo = ({ validate }) => {
             { value: "option4", label: "4 - Important" },
             { value: "option5", label: "5 - Very Important" },
       ];
-    
-      const { stepTwo } = useAppSelector((state) => state.item);
+      const { fieldValues } = useAppSelector((state) => state.item);
       const dispatch = useAppDispatch();
+      // console.log(setFieldsValues);
       return (
         <>
           <h1 className="quatilty-benefits">
@@ -35,15 +35,18 @@ const StepTwo = ({ validate }) => {
             </span>
           </Text>
           <CustomSelect
-            onClick={(v) => {
-              console.log(v.target.value);
-              dispatch(setStepTwoState({ CompositionEvent: v.target.value }));
+            // onChange={(v) => {
+            //   console.log(v.target.value);
+            //   dispatch(setStepTwoState({ ...stepTwo,CompositionEvent: v.target.value }));
+            // }}
+            onClick={(e) => {
+              dispatch(setFieldsValues({ CompositionEvent: e.target.value }));
+              console.log(e.target.value);
             }}
-            defaultValue={stepTwo.CompositionEvent}
+            defaultValue={fieldValues.CompositionEvent}
             name="CompositionEvent"
             validate={validate}
             className="custom-select"
-           
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -51,16 +54,12 @@ const StepTwo = ({ validate }) => {
               </option>
             ))}
           </CustomSelect>
-          {stepTwo?.errors?.CompositionEvent && (
-            <p
-              className="validation-error"
-            >
-              {stepTwo?.errors?.CompositionEvent}
+          {/* {setFieldsValues?.errors?.CompositionEvent && (
+            <p className="validation-error">
+              {setFieldsValues?.errors?.CompositionEvent}
             </p>
-          )}
-          <Text
-            className="text-box"
-          >
+          )} */}
+          <Text className="text-box">
             <span>
               Vision: Coverage for glasses and exams
               <span className="color-red">*</span>
@@ -71,11 +70,15 @@ const StepTwo = ({ validate }) => {
             placeholder="Please select a job"
             validate={validate} 
             className="custom-select"
-            onClick={(v) => {
-              console.log(v.target.value);
-              dispatch(setStepTwoState({ Vision: v.target.value }));
+            // onChange={(v) => {
+            //   console.log(v.target.value);
+            //   dispatch(setStepTwoState({ ...stepTwo,Vision: v.target.value }));
+            // }}
+            onClick={(e) => {
+              dispatch(setFieldsValues({ Vision: e.target.value }));
+              console.log(e.target.value);
             }}
-            defaultValue={stepTwo.Vision}
+            defaultValue={fieldValues.Vision}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -83,16 +86,12 @@ const StepTwo = ({ validate }) => {
               </option>
             ))}
           </CustomSelect>
-          {stepTwo?.errors?.Vision && (
-            <p
-              className="validation-error"
-            >
-              {stepTwo?.errors?.Vision}
+          {/* {setFieldsValues?.errors?.Vision && (
+            <p className="validation-error">
+              {setFieldsValues?.errors?.Vision}
             </p>
-          )}
-          <Text
-            className="text-box"
-          >
+          )} */}
+          <Text className="text-box">
             <span>
               Hearing: Coverage for hearing aids and exams
               <span className="color-red">*</span>
@@ -103,27 +102,27 @@ const StepTwo = ({ validate }) => {
             placeholder="Please select a job"
             validate={validate}
             className="custom-select"
-            onClick={(v) => {
-              dispatch(setStepTwoState({ Hearing: v.target.value }));
+            // onChange={(v) => {
+            //   dispatch(setStepTwoState({ ...stepTwo,Hearing: v.target.value }));
+            // }}
+            onClick={(e) => {
+              dispatch(setFieldsValues({  Hearing: e.target.value }));
+              console.log(e.target.value);
             }}
-            defaultValue={stepTwo.Hearing}
-          >
+            defaultValue={fieldValues.Hearing}
+            >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </CustomSelect>
-          {stepTwo?.errors?.Hearing && (
-            <p
-              className="validation-error"
-            >
-              {stepTwo?.errors?.Hearing}
+          {/* {setFieldsValues?.errors?.Hearing && (
+            <p className="validation-error">
+              {setFieldsValues?.errors?.Hearing}
             </p>
-          )}
-          <Text
-            className="text-box"
-          >
+          )} */}
+          <Text className="text-box">
             <span>
               Part B Giveback: Up to $170 monthly rebate on your part b premiums
               <span className="color-red">*</span>
@@ -134,10 +133,14 @@ const StepTwo = ({ validate }) => {
             placeholder="Please select a job"
             validate={validate}
             className="custom-select"
-            onClick={(v) => {
-              dispatch(setStepTwoState({ PartB: v.target.value }));
+            // onChange={(v) => {
+            //   dispatch(setStepTwoState({ ...stepTwo,PartB: v.target.value }));
+            // }}
+            onClick={(e) => {
+              dispatch(setFieldsValues({ PartB: e.target.value }));
+              console.log(e.target.value);
             }}
-            defaultValue={stepTwo.PartB}
+            defaultValue={fieldValues.PartB}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -145,16 +148,12 @@ const StepTwo = ({ validate }) => {
               </option>
             ))}
           </CustomSelect>
-          {stepTwo?.errors?.PartB && (
-            <p
-              className="validation-error"
-            >
-              {stepTwo?.errors?.PartB}
+          {/* {setFieldsValues?.errors?.PartB && (
+            <p className="validation-error">
+              {setFieldsValues?.errors?.PartB}
             </p>
-          )}
-          <Text
-            className="text-box"
-          >
+          )} */}
+          <Text className="text-box">
             <span>
               Grocery Card: Spending allowances for healthy foods
               <span className="color-red">*</span>
@@ -165,10 +164,14 @@ const StepTwo = ({ validate }) => {
             placeholder="Please select a job"
             validate={validate}
             className="custom-select"
-            onClick={(v) => {
-              dispatch(setStepTwoState({ GroceryCard: v.target.value }));
+            // onChange={(v) => {
+            //   dispatch(setStepTwoState({ ...stepTwo,GroceryCard: v.target.value }));
+            // }}
+            onClick={(e) => {
+              dispatch(setFieldsValues({ GroceryCard: e.target.value }));
+              console.log(e.target.value);
             }}
-            defaultValue={stepTwo.GroceryCard}
+            defaultValue={fieldValues.GroceryCard}
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -176,13 +179,11 @@ const StepTwo = ({ validate }) => {
               </option>
             ))}
           </CustomSelect>
-          {stepTwo?.errors?.GroceryCard && (
-            <p
-              className="validation-error"
-            >
-              {stepTwo?.errors?.GroceryCard}
+          {/* {setFieldsValues?.errors?.GroceryCard && (
+            <p className="validation-error">
+              {setFieldsValues?.errors?.GroceryCard}
             </p>
-          )}
+          )} */}
         </>
       );
   };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepSixState, setField3, setField2 } from "../../Redux/itemsSlice";
+import { setFieldsValues , setField3, setField2 } from "../../Redux/itemsSlice";
 import { Text, Divider, Modal, Box, Button, Popover, Image,  } from "@mantine/core";
 import { Field } from "formik";
 import PrescriptionField from "../../features/prescription/PrescriptionField";
@@ -112,9 +112,9 @@ const StepSix = ({ validate }) => {
                   }}
                   defaultValue={StepSix.doctor}
                   onClick={(v) => {
-                    dispatch(setField3(true));
-                    setStepSixState({ doctor: v.target.value });
-                    console.log("yes");
+                    // dispatch(setField3(true));
+                    dispatch(setFieldsValues({ doctor: v.target.value }));
+                    // console.log("yes");
                   }}
                 />
                 <CustomRadio
@@ -130,11 +130,11 @@ const StepSix = ({ validate }) => {
                   }}
                   defaultValue={StepSix.doctor}
                   onClick={(v) => {
-                    dispatch(setStepSixState({ doctor: v.target.value }));
-                    console.log(v.target.value);
+                    dispatch(setFieldsValues({ doctor: v.target.value }));
+                    // console.log(v.target.value);
                   }}
                 />
-                {stepSix.errors?.doctor && (
+                {/* {stepSix.errors?.doctor && (
                   <p
                     style={{
                       color: "red",
@@ -143,7 +143,7 @@ const StepSix = ({ validate }) => {
                   >
                     {stepSix.errors?.doctor}
                   </p>
-                )}
+                )} */}
                 <TransitionGroup>
                   {showTravelOptions && (
                     <CSSTransition classNames="popover1" timeout={300}>
@@ -275,7 +275,7 @@ const StepSix = ({ validate }) => {
                   name="medications"
                   label="Yes"
                   value="yes"
-                  required
+                  // required
                   onChange={() => {
                     form.setFieldValue("medications", "yes");
                     setShowTravelOptions1(true);
@@ -283,8 +283,9 @@ const StepSix = ({ validate }) => {
                   defaultValue={StepSix.medications}
                   onClick={(v) => {
                     {
-                      dispatch(setField2(true));
-                      setStepSixState({ medications: v.target.value });
+                      // dispatch(setField2(true));
+                      dispatch(setFieldsValues({ medications: v.target.value }));
+                      // dispatch(setFieldsValues({ Vision: e.target.value }));
                       console.log("yes");
                     }
                   }}
@@ -296,27 +297,27 @@ const StepSix = ({ validate }) => {
                   name="medications"
                   label="No"
                   value="no"
-                  required
+                  // required
                   onChange={() => {
                     form.setFieldValue("medications", "no");
                     setShowTravelOptions1(false);
                   }}
                   defaultValue={StepSix.medications}
                   onClick={(v) => {
-                    dispatch(setStepSixState({ medications: v.target.value }));
+                    dispatch(setFieldsValues({ medications: v.target.value }));
                     console.log(v.target.value);
                   }}
                 />
-                {stepSix.errors?.medications && (
+                {/* {stepSix?.errors?.medications && (
                   <p
                     style={{
                       color: "red",
                       fontStyle: "italic",
                     }}
                   >
-                    {stepSix.errors?.medications}
+                    {stepSix?.errors?.medications}
                   </p>
-                )}
+                )} */}
                 <TransitionGroup>
                   {showTravelOptions1 && (
                     <CSSTransition classNames="popover1" timeout={300}>

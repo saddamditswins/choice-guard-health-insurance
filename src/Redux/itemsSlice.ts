@@ -1,5 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface fieldValues {
+    Zipcode: string,
+    CompositionEvent: string,
+    Vision: string,
+    Hearing: string,
+    PartB: string,
+    GroceryCard: string,
+    
+    Over: string,
+    Utilities: string,
+    Transportation: string,
+    Emergency: string,
+    USA: string,
+    USA1: string,
+    world: string,
+
+    Medicare: string,
+    Medicaid: string,
+    Tricare: string,
+    chronic: string,
+    
+    MedicareValue: string,
+    Supplement: string,
+    Employer: string,
+    Prescription: string,
+    Other: string,
+    NewField: string,
+    None: string,
+
+    doctor: string,
+    distance: string,
+    doctorname: string,
+    address: string,
+    medications: string,
+    medicinename: string,
+    dosage: string,
+    quantity: string,
+    frequency: string,
+
+    preferable: string,
+    network: string,
+    important: string,
+    errors: any
+}
 interface stepOne {
   Zipcode: string;
   errors: any;
@@ -61,14 +105,17 @@ interface IItemState {
   field2: boolean;
   field3: boolean;
   isActive: number;
-  stepOne: stepOne;
-  stepTwo: stepTwo;
-  stepThree: stepThree;
-  stepFour: stepFour;
-  stepFive: stepFive;
-  stepSix: stepSix;
-  stepSeven: stepSeven;
+  fieldValues: fieldValues
   step: number;
+  // errors: {}
+
+  // stepOne: stepOne;
+  // stepTwo: stepTwo;
+  // stepThree: stepThree;
+  // stepFour: stepFour;
+  // stepFive: stepFive;
+  // stepSix: stepSix;
+  // stepSeven: stepSeven;
 }
 
 const initialState: IItemState = {
@@ -77,18 +124,13 @@ const initialState: IItemState = {
   field3: false,
   step: 1,
   isActive: 1,
-  stepOne: {
+  fieldValues: {
     Zipcode: "",
-    errors: {},
-  },
-  stepTwo: {
     CompositionEvent: "",
     Vision: "",
     Hearing: "",
     PartB: "",
     GroceryCard: "",
-  },
-  stepThree: {
     Over: "",
     Utilities: "",
     Transportation: "",
@@ -96,23 +138,17 @@ const initialState: IItemState = {
     USA: "",
     USA1: "",
     world: "",
-  },
-  stepFour: {
     Medicare: "",
     Medicaid: "",
     Tricare: "",
     chronic: "",
-  },
-  stepFive: {
-    Medicare: "",
+    MedicareValue: "",
     Supplement: "",
     Employer: "",
     Prescription: "",
     Other: "",
     NewField: "",
     None: "",
-  },
-  stepSix: {
     doctor: "",
     distance: "",
     doctorname: "",
@@ -122,12 +158,62 @@ const initialState: IItemState = {
     dosage: "",
     quantity: "",
     frequency: "",
-  },
-  stepSeven: {
     preferable: "",
     network: "",
     important: "",
+    errors: {}
   },
+  // stepOne: {
+  //   Zipcode: "",
+  //   errors: {},
+  // },
+  // stepTwo: {
+  //   CompositionEvent: "",
+  //   Vision: "",
+  //   Hearing: "",
+  //   PartB: "",
+  //   GroceryCard: "",
+  // },
+  // stepThree: {
+  //   Over: "",
+  //   Utilities: "",
+  //   Transportation: "",
+  //   Emergency: "",
+  //   USA: "",
+  //   USA1: "",
+  //   world: "",
+  // },
+  // stepFour: {
+  //   Medicare: "",
+  //   Medicaid: "",
+  //   Tricare: "",
+  //   chronic: "",
+  // },
+  // stepFive: {
+  //   Medicare: "",
+  //   Supplement: "",
+  //   Employer: "",
+  //   Prescription: "",
+  //   Other: "",
+  //   NewField: "",
+  //   None: "",
+  // },
+  // stepSix: {
+  //   doctor: "",
+  //   distance: "",
+  //   doctorname: "",
+  //   address: "",
+  //   medications: "",
+  //   medicinename: "",
+  //   dosage: "",
+  //   quantity: "",
+  //   frequency: "",
+  // },
+  // stepSeven: {
+  //   preferable: "",
+  //   network: "",
+  //   important: "",
+  // },
 };
 
 const itemsSlice = createSlice({
@@ -135,7 +221,7 @@ const itemsSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      state.stepOne = action.payload;
+      state.fieldValues = action.payload;
     },
     setField: (state, action) => {
       state.field = action.payload;
@@ -146,34 +232,50 @@ const itemsSlice = createSlice({
     setField3: (state, action) => {
       state.field3 = action.payload;
     },
-    setStepOneState: (state, action) => {
-      state.stepOne = action.payload;
-      state.isActive = state.step;
+    setFieldsValues: (state, action) => {
+      debugger
+      state.isActive = state.isActive + 1;
+      state.fieldValues[state.isActive] = { ...action.payload };
     },
-    setStepTwoState: (state, action) => {
-      state.stepTwo = action.payload;
-      state.isActive = state.step;
-    },
-    setStepThreeState: (state, action) => {
-      state.stepThree = action.payload;
-      state.isActive = state.step;
-    },
-    setStepFourState: (state, action) => {
-      state.stepFour = action.payload;
-      state.isActive = state.step;
-    },
-    setStepFiveState: (state, action) => {
-      state.stepFive = action.payload;
-      state.isActive = state.step;
-    },
-    setStepSixState: (state, action) => {
-      state.stepSix = action.payload;
-      state.isActive = state.step;
-    },
-    setStepSevenState: (state, action) => {
-      state.stepSeven = action.payload;
-      state.isActive = state.step;
-    },
+
+    // setFieldsValues:(state, action)=> {
+    //   fieldValues: {
+    //     action.payload
+    //   }
+    // },
+
+    // setStepOneState: (state, action) => {
+    //   state.stepOne = action.payload;
+    //   state.isActive = state.step;
+    // },
+
+    // setStepTwoState: (state, action) => {
+    //   state.stepTwo = action.payload;
+    //   state.isActive = state.step;
+    // },
+    // setStepThreeState: (state, action) => {
+    //   state.stepThree = action.payload;
+    //   state.isActive = state.step;
+    // },
+    // setStepFourState: (state, action) => {
+    //   state.stepFour = action.payload;
+    //   state.isActive = state.step;
+    // },
+    // setStepFiveState: (state, action) => {
+    //   state.stepFive = action.payload;
+    //   state.isActive = state.step;
+    // },
+
+    // setStepSixState: (state, action) => {
+    //   state.stepSix = action.payload;
+    //   state.isActive = state.step;
+    // },
+
+    // setStepSevenState: (state, action) => {
+    //   state.stepSeven = action.payload;
+    //   state.isActive = state.step;
+    // },
+
     handleSubmitNext: (state, action) => {
       debugger
       state.step = state.step + 1;
@@ -188,15 +290,16 @@ const itemsSlice = createSlice({
 const itemsReducer = itemsSlice.reducer;
 export const {
   setField,
-  setStepOneState,
+  setFieldsValues,
   handleSubmitNext,
   handleSubmitPrev,
-  setStepTwoState,
-  setStepFourState,
-  setStepFiveState,
-  setStepThreeState,
-  setStepSixState,
-  setStepSevenState,
+  // setStepOneState,
+  // setStepTwoState,
+  // setStepFourState,
+  // setStepFiveState,
+  // setStepThreeState,
+  // setStepSixState,
+  // setStepSevenState,
   addItem,
   setField2,
   setField3,

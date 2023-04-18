@@ -2,7 +2,7 @@ import "./Prescription.css";
 import React, { useState } from "react";
 import { FaChevronDown, FaPencilAlt, FaTimes } from "react-icons/fa";
 import { PrescriptionItem } from "../../Redux/PrescriptionSlice";
-import { setStepOneState, setStepSixState } from "../../Redux/itemsSlice";
+import {  setFieldsValues } from "../../Redux/itemsSlice";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
 
 import {
@@ -51,8 +51,7 @@ const PrescriptionField = ({ label, placeholder, data }) => {
     } else {
       setSelectedItem("");
     }
-    dispatch(setStepSixState({ medicinename: v.target.value }));
-
+    dispatch(setFieldsValues({ medicinename: event.target.value }));
   };
 
   const handleItemClick = (item) => {
@@ -69,12 +68,11 @@ const PrescriptionField = ({ label, placeholder, data }) => {
     setShowModalContent(false);
   };
 
-
-
-
   const handleSelect = (value) => {
+    debugger
     setSelectedValue(value);
-    dispatch(setStepOneState({ dosage: value.target.value }));
+    // dispatch(setStepOneState({ dosage: value.target.value }));
+    dispatch(setFieldsValues({ dosage: value.target.value }))
   };
 
   const handleShowPrescription = () => {
@@ -216,7 +214,7 @@ const PrescriptionField = ({ label, placeholder, data }) => {
                       fontSize: "19px",
 
                     }}
-                    defaultValue={stepSix.dosage}
+                    // defaultValue={stepSix.dosage}
 
                     placeholder="Pick one"
                     data={[

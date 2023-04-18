@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepFourState, setField } from "../../Redux/itemsSlice";
+import { setFieldsValues, setField } from "../../Redux/itemsSlice";
 import { Text, Button, Divider } from "@mantine/core";
 import { Field } from "formik";
 import CustomRadio from "../../features/custom-radio/CustomRadio";
@@ -8,21 +8,13 @@ import "../../../src/assets/scss/common.scss";
 
 const StepFour = ({ validate }) => {
         const dispatch = useAppDispatch();
-        const { stepFour } = useAppSelector((state) => state.item);
+        // const { stepFour } = useAppSelector((state) => state.item);
         return (
           <>
             <Field validate={validate}>
               {({ field }) => (
                 <>
-                  <Text
-                    // style={{
-                    //   color: "#333",
-                    //   fontWeight: 600,
-                    //   fontSize: "30px",
-                    //   fontFamily: "Montserrat, sans-serif",
-                    // }}
-                    className="grey-text"
-                  >
+                  <Text className="grey-text">
                     Eligibility Check
                   </Text>
                   <p>
@@ -31,28 +23,14 @@ const StepFour = ({ validate }) => {
                   </p>
                   <Divider my="sm" />
       
-                  <Text
-                    // style={{
-                    //   fontWeight: 600,
-                    //   marginTop: "20px ",
-                    //   color: "#495057",
-                    //   fontFamily: "Montserrat, sans-serif",
-                    //   marginBottom: "8px",
-                    //   fontSize: "16px",
-                    // }}
-                    className="text-two"
-                  >
+                  <Text className="text-two">
                     <span>
                       {" "}
                       Do you have (or have you applied for) Medicare Parts A and B?
                       <span className="color-red">*</span>{" "}
-                      {/* style={{ color: "red" }} */}
                     </span>
                   </Text>
-                  <div
-                    // style={{ display: "flex", flexDirection: "column", gap: "4px" }}
-                    className="div-wrapper-two"
-                  >
+                  <div className="div-wrapper-two">
                     <CustomRadio
                       {...field}
                       id="travel1"
@@ -60,9 +38,9 @@ const StepFour = ({ validate }) => {
                       label="Yes"
                       value="yes"
                       required
-                      defaultValue={stepFour.Medicare}
+                      // defaultValue={stepFour.Medicare}
                       onClick={(v) => {
-                        dispatch(setStepFourState({ Medicare: v.target.value }));
+                        dispatch(setFieldsValues({ Medicare: v.target.value }));
                         console.log(v.target.value);
                       }}
                     />
@@ -74,20 +52,20 @@ const StepFour = ({ validate }) => {
                       label="No"
                       value="no"
                       required
-                      defaultValue={stepFour.Medicare}
+                      // defaultValue={stepFour.Medicare}
                       onClick={(v) => {
-                        dispatch(setStepFourState({ Medicare: v.target.value }));
+                        dispatch(setFieldsValues({ Medicare: v.target.value }));
                         console.log(v.target.value);
                       }}
                     />
                   </div>
-                  {stepFour.errors?.Medicare && (
-                    <p
-                     className="error-validation"
-                    >
+                  {/* {stepFour.errors?.Medicare && (
+                    <p className="error-validation">
+
+                    
                       {stepFour.errors?.Medicare}
                     </p>
-                  )}
+                  )} */}
                 </>
               )}
             </Field>
@@ -95,9 +73,7 @@ const StepFour = ({ validate }) => {
             <Field validate={validate}>
               {({ field }) => (
                 <>
-                  <Text
-                    className="text-box"
-                  >
+                  <Text className="text-box">
                     {" "}
                     <span>
                       {" "}
@@ -105,10 +81,7 @@ const StepFour = ({ validate }) => {
                       <span className="color-red">*</span>{" "}
                     </span>{" "}
                   </Text>
-                  <div
-                    // style={{ display: "flex", flexDirection: "column", gap: "2px" }}
-                    className="div-wrapper"
-                  >
+                  <div className="div-wrapper">
                     <CustomRadio
                       {...field}
                       id="travel1"
@@ -116,9 +89,9 @@ const StepFour = ({ validate }) => {
                       label="Yes"
                       value="yes"
                       required
-                      defaultValue={stepFour.Medicaid}
+                      // defaultValue={stepFour.Medicaid}
                       onClick={(v) => {
-                        dispatch(setStepFourState({ Medicaid: v.target.value }));
+                        dispatch(setFieldsValues({ Medicaid: v.target.value }));
                         console.log(v.target.value);
                       }}
                     />
@@ -129,24 +102,22 @@ const StepFour = ({ validate }) => {
                       label="No"
                       value="no"
                       required
-                      defaultValue={stepFour.Medicaid}
-                      onClick={(v) => {
-                        dispatch(setStepFourState({ Medicaid: v.target.value }));
-                        console.log(v.target.value);
+                      // defaultValue={stepFour.Medicaid}
+                      // onClick={(v) => {
+                      //   dispatch(setFieldsValues({ Medicaid: v.target.value }));
+                      //   console.log(v.target.value);
+                      // }}
+                      onChange={(v) => {
+                        dispatch(setFieldsValues({ Medicaid: v.target.value }));
+                        // console.log(v.target.value);
                       }}
                     />
                   </div>
-                  {stepFour.errors?.Medicaid && (
-                    <p
-                      // style={{
-                      //   color: "red",
-                      //   fontStyle: "italic",
-                      // }}
-                      className="error-validation"
-                    >
+                  {/* {stepFour.errors?.Medicaid && (
+                    <p className="error-validation">
                       {stepFour.errors?.Medicaid}
                     </p>
-                  )}
+                  )} */}
                 </>
               )}
             </Field>
@@ -154,21 +125,9 @@ const StepFour = ({ validate }) => {
             <Field validate={validate}>
               {({ field }) => (
                 <>
-                  <div className="div-wrapper"
-                    // style={{ display: "flex", flexDirection: "column", gap: "2px" }}
-                  >
+                  <div className="div-wrapper">
                     {" "}
-                    <Text
-                      // style={{
-                      //   fontWeight: 600,
-                      //   marginTop: "20px ",
-                      //   color: "#495057",
-                      //   fontFamily: "Montserrat, sans-serif",
-                      //   marginBottom: "8px",
-                      //   fontSize: "16px",
-                      // }}
-                      className="text-two"
-                    >
+                    <Text className="text-two">
                       <span>
                         {" "}
                         Do you have VA or Tricare benefits?
@@ -182,9 +141,9 @@ const StepFour = ({ validate }) => {
                       label="None"
                       value="yes"
                       required
-                      defaultValue={stepFour.Tricare}
+                      // defaultValue={stepFour.Tricare}
                       onClick={(v) => {
-                        dispatch(setStepFourState({ Tricare: v.target.value }));
+                        dispatch(setFieldsValues({ Tricare: v.target.value }));
                         console.log(v.target.value);
                       }}
                     />
@@ -195,9 +154,9 @@ const StepFour = ({ validate }) => {
                       label="VA"
                       value="no"
                       required
-                      defaultValue={stepFour.Tricare}
+                      // defaultValue={stepFour.Tricare}
                       onClick={(v) => {
-                        dispatch(setStepFourState({ Tricare: v.target.value }));
+                        dispatch(setFieldsValues({ Tricare: v.target.value }));
                         console.log(v.target.value);
                       }}
                     />
@@ -208,33 +167,26 @@ const StepFour = ({ validate }) => {
                       label="Tricare"
                       value="Tricare"
                       required
-                      defaultValue={stepFour.Medicaid}
+                      // defaultValue={stepFour.Medicaid}
                       onClick={(v) => {
-                        dispatch(setStepFourState({ Medicaid: v.target.value }));
+                        dispatch(setFieldsValues({ Medicaid: v.target.value }));
                         console.log(v.target.value);
                       }}
                     />
                   </div>
-                  {stepFour.errors?.Tricare && (
-                    <p
-                     className="error-validation"
-                    >
+                  {/* {stepFour.errors?.Tricare && (
+                    <p className="error-validation">
                       {stepFour.errors?.Tricare}
                     </p>
-                  )}
+                  )} */}
                 </>
               )}
             </Field>
             <Field validate={validate}>
               {({ field }) => (
                 <>
-                  <div
-                    // style={{ display: "flex", flexDirection: "column", gap: "2px" }}
-                  className="div-wrapper"
-                  >
-                    <Text
-                      className="text-two"
-                    >
+                  <div className="div-wrapper">
+                    <Text className="text-two">
                       Do you have any chronic health conditions?
                     </Text>
                     <CustomRadio
@@ -245,13 +197,14 @@ const StepFour = ({ validate }) => {
                       value="yes"
                       required
                       onClick={(v) => {
-                        {
-                          dispatch(setField(true));
-                          setStepFourState({ chronic: v.target.value });
-                          console.log("yes");
-                        }
+                      {
+                        // dispatch(setField(true));
+                        dispatch(setFieldsValues({ chronic: v.target.value }));
+                        console.log("yes");
+                      }
+                      // dispatch(setFieldsValues({ Vision: e.target.value }));
                       }}
-                      defaultValue={stepFour.chronic}
+                      // defaultValue={stepFour.chronic}
                     />
       
                     <CustomRadio
@@ -261,7 +214,7 @@ const StepFour = ({ validate }) => {
                       label="No"
                       value="no"
                       onClick={(v) => {
-                        dispatch(setStepFourState({ chronic: v.target.value }));
+                        dispatch(setFieldsValues({ chronic: v.target.value }));
                         console.log(v.target.value);
                       }}
                       required
@@ -274,8 +227,8 @@ const StepFour = ({ validate }) => {
                       value=" Prefer Not to Answer"
                       required
                       onClick={(v) => {
-                        dispatch(setStepFourState({ chronic: v.target.value }));
-                        console.log(v.target.value);
+                        dispatch(setFieldsValues({ chronic: v.target.value }));
+                        // console.log(v.target.value);
                       }}
                     />
                   </div>
@@ -283,9 +236,7 @@ const StepFour = ({ validate }) => {
               )}
             </Field>
       
-            <Text
-              className="paragraph-align-two"
-            >
+            <Text className="paragraph-align-two">
               Chronic Special Needs plans may offer additional benefits for those with
               chronic conditions. These plans require a chronic condition for <br />
               enrollment. This question is not required and is only used to determine

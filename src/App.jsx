@@ -24,14 +24,15 @@ import {
   handleSubmitPrev,
   setField,
   setField2,
-  setStepOneState,
-  setStepThreeState,
-  setStepFourState,
-  setStepTwoState,
-  setStepFiveState,
-  setStepSixState,
-  setStepSevenState,
+  // setStepOneState,
+  // setStepThreeState,
+  // setStepFourState,
+  // setStepTwoState,
+  // setStepFiveState,
+  // setStepSixState,
+  // setStepSevenState,
   setField3,
+  setFieldsValues,
 } from "./Redux/itemsSlice";
 import {
   Paper,
@@ -59,7 +60,7 @@ function validate2(data, required) {
 }
 
 const App = () => {
-  const { step, stepOne, stepTwo, stepThree, stepFour, stepSix, stepSeven, isActive } =
+  const { step, stepOne, stepTwo, stepThree, stepFour, stepFive, stepSix, stepSeven, isActive } =
     useAppSelector((state) => state.item);
   const dispatch = useAppDispatch();
 
@@ -69,21 +70,82 @@ const App = () => {
   };
 
   const nextStep = (values) => {
-    debugger
-    // if(Object.values(values)){
-      // if(Object.keys(value).length === 0){
-      // validateStep(values);
-      // } else {
-      // if(validateStep(values)){
-        if(Object.values(values).length === 0){
-        dispatch(handleSubmitNext());
-      } else {
-        validateStep(values);
+      debugger
+      console.log(values);
+      if(step === 1){
+        // console.log(values);
+         const allTrue = Object.values(values).some(
+            values => values === "");
+          if(!allTrue){
+            dispatch(handleSubmitNext());  
+          } else {
+            validateStep(values);
+          }
       }
       
-    // validateStep(values);
-    // console.log("data", values);
-    // console.log("we hit this line because there are some errors in the form");
+      if(step === 2){
+        debugger
+        // values.stepTwo = stepTwo
+        // console.log(values);
+        const allTrue = Object.values(values).some(
+           values => values === ""
+         );
+         if(!allTrue){
+           dispatch(handleSubmitNext());  
+         } else {
+           validateStep(values);
+         }
+      }
+
+      if(step === 3){
+        const allTrue = Object.values(values).some(
+          values => values === ""
+        );
+        if(!allTrue){
+          dispatch(handleSubmitNext());  
+        } else {
+          validateStep(values);  
+        }
+      }
+
+      if(step === 4){
+        const allTrue = Object.values(values).some(
+          values => values === ""
+        );
+        if(!allTrue){
+          dispatch(handleSubmitNext());  
+        } else {
+          validateStep(values);  
+        }
+      }
+      if(step === 5){
+        const allTrue = Object.values(values).some(
+          values => values === ""
+        );
+        if(!allTrue){
+          dispatch(handleSubmitNext());  
+        } else {
+          validateStep(values);  
+        }
+      }
+      if(step === 6){
+        const allTrue = Object.values(values).some(
+          values => values === ""
+        );
+        if(!allTrue){
+          dispatch(handleSubmitNext());  
+        } else {
+          validateStep(values);  
+        }
+      }
+      if(step === 7){
+        const allTrue = Object.values(values).some(values => values === "");
+        if(!allTrue){
+          dispatch(handleSubmitNext());  
+        } else {
+          validateStep(values);  
+        }
+      }
   };
 
   const prevStep = () => {
@@ -95,15 +157,18 @@ const App = () => {
     switch (step) {
         case 1:
         errors = validate2(values, ['Zipcode'])
-        dispatch(setStepOneState({
+        
+        // dispatch(setStepOneState({
+        //   values, errors
+        // }))
+        dispatch(setFieldsValues({
           values, errors
         }))
         if (!StepOne.Zipcode) {
           return false;
         }
-        dispatch(handleSubmitNext());
+        // dispatch(handleSubmitNext());
         break;
-        
         case 2:
         errors = validate2(values, [
           "CompositionEvent",
@@ -112,13 +177,20 @@ const App = () => {
           "PartB",
           "GroceryCard",
         ]);
+        debugger
         console.log(errors);
+        // dispatch(
+        //   setStepTwoState({
+        //     ...values,
+        //     errors,
+        //   })
+        // );
         dispatch(
-          setStepTwoState({
+          setFieldsValues({
             ...values,
-            errors,
+            errors
           })
-        );
+        )
         if (
           (!StepTwo.CompositionEvent,
             !StepTwo.Vision,
@@ -168,18 +240,18 @@ const App = () => {
         }
         break;
       
-        case 5:  errors = validate2(values, ["doctor", "medications"]);
-      console.log(errors);
-      dispatch(
-        setStepSixState({
-          ...values,
-          errors,
-        })
-      );
-      if ((!StepSix.doctor, !StepSix.medications)) {
-        return false;
-      }
-      break;
+      //   case 5:  errors = validate2(values, ["doctor", "medications"]);
+      // console.log(errors);
+      // dispatch(
+      //   setStepSixState({
+      //     ...values,
+      //     errors,
+      //   })
+      // );
+      // if ((!StepSix.doctor, !StepSix.medications)) {
+      //   return false;
+      // }
+      // break;
       
         case 6:
         errors = validate2(values, ["doctor", "medications"]);
@@ -277,9 +349,6 @@ const App = () => {
 
                     {step !== 7 && (
                       <button
-                        // style={{
-                        //   backgroundColor: !validateStep(values) ? 'darkgray' : 'green'
-                        // }}
                         type="button"
                         // disabled={!validateStep(values)}
                         onClick={() => {
@@ -296,6 +365,7 @@ const App = () => {
                           console.log(
                             stepOne,
                             stepFour,
+                            stepFive,
                             stepSix,
                             stepSeven,
                             stepThree,
