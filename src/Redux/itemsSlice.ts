@@ -233,7 +233,6 @@ const itemsSlice = createSlice({
       state.field3 = action.payload;
     },
     setFieldsValues: (state, action) => {
-      debugger
       state.isActive = state.isActive + 1;
       state.fieldValues[state.isActive] = { ...action.payload };
     },
@@ -277,7 +276,6 @@ const itemsSlice = createSlice({
     // },
 
     handleSubmitNext: (state, action) => {
-      debugger
       state.step = state.step + 1;
     },
     handleSubmitPrev: (state, action) => {

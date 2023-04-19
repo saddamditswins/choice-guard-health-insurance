@@ -10,14 +10,14 @@ import page from "./assets/Page.png";
 import { Field, Formik, useFormikContext } from "formik";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useAppDispatch, useAppSelector } from "./Redux/store";
-import { advancedSchema } from "../src/features/validations/Validation"; 
-import  StepOne  from "../src/components/Steps/Step1";
-import  StepTwo  from "../src/components/Steps/Step2";
-import  StepThree  from "../src/components/Steps/Step3";
-import  StepFour  from "../src/components/Steps/Step4";
-import  StepFive  from "../src/components/Steps/Step5";
-import  StepSix  from "../src/components/Steps/Step6";
-import  StepSeven  from "../src/components/Steps/Step7";
+import { advancedSchema } from "../src/features/validations/Validation";
+import StepOne from "../src/components/Steps/Step1";
+import StepTwo from "../src/components/Steps/Step2";
+import StepThree from "../src/components/Steps/Step3";
+import StepFour from "../src/components/Steps/Step4";
+import StepFive from "../src/components/Steps/Step5";
+import StepSix from "../src/components/Steps/Step6";
+import StepSeven from "../src/components/Steps/Step7";
 
 import {
   handleSubmitNext,
@@ -60,8 +60,17 @@ function validate2(data, required) {
 }
 
 const App = () => {
-  const { step, stepOne, stepTwo, stepThree, stepFour, stepFive, stepSix, stepSeven, isActive } =
-    useAppSelector((state) => state.item);
+  const {
+    step,
+    stepOne,
+    stepTwo,
+    stepThree,
+    stepFour,
+    stepFive,
+    stepSix,
+    stepSeven,
+    isActive,
+  } = useAppSelector((state) => state.item);
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -70,82 +79,69 @@ const App = () => {
   };
 
   const nextStep = (values) => {
-      debugger
-      console.log(values);
-      if(step === 1){
-        // console.log(values);
-         const allTrue = Object.values(values).some(
-            values => values === "");
-          if(!allTrue){
-            dispatch(handleSubmitNext());  
-          } else {
-            validateStep(values);
-          }
+    console.log(values);
+    if (step === 1) {
+      // console.log(values);
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
       }
-      
-      if(step === 2){
-        debugger
-        // values.stepTwo = stepTwo
-        // console.log(values);
-        const allTrue = Object.values(values).some(
-           values => values === ""
-         );
-         if(!allTrue){
-           dispatch(handleSubmitNext());  
-         } else {
-           validateStep(values);
-         }
-      }
+    }
 
-      if(step === 3){
-        const allTrue = Object.values(values).some(
-          values => values === ""
-        );
-        if(!allTrue){
-          dispatch(handleSubmitNext());  
-        } else {
-          validateStep(values);  
-        }
+    if (step === 2) {
+      // values.stepTwo = stepTwo
+      // console.log(values);
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
       }
+    }
 
-      if(step === 4){
-        const allTrue = Object.values(values).some(
-          values => values === ""
-        );
-        if(!allTrue){
-          dispatch(handleSubmitNext());  
-        } else {
-          validateStep(values);  
-        }
+    if (step === 3) {
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
       }
-      if(step === 5){
-        const allTrue = Object.values(values).some(
-          values => values === ""
-        );
-        if(!allTrue){
-          dispatch(handleSubmitNext());  
-        } else {
-          validateStep(values);  
-        }
+    }
+
+    if (step === 4) {
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
       }
-      if(step === 6){
-        const allTrue = Object.values(values).some(
-          values => values === ""
-        );
-        if(!allTrue){
-          dispatch(handleSubmitNext());  
-        } else {
-          validateStep(values);  
-        }
+    }
+    if (step === 5) {
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
       }
-      if(step === 7){
-        const allTrue = Object.values(values).some(values => values === "");
-        if(!allTrue){
-          dispatch(handleSubmitNext());  
-        } else {
-          validateStep(values);  
-        }
+    }
+    if (step === 6) {
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
       }
+    }
+    if (step === 7) {
+      const allTrue = Object.values(values).some((values) => values === "");
+      if (!allTrue) {
+        dispatch(handleSubmitNext());
+      } else {
+        validateStep(values);
+      }
+    }
   };
 
   const prevStep = () => {
@@ -155,21 +151,24 @@ const App = () => {
   const validateStep = (values) => {
     let errors = {};
     switch (step) {
-        case 1:
-        errors = validate2(values, ['Zipcode'])
-        
+      case 1:
+        errors = validate2(values, ["Zipcode"]);
+
         // dispatch(setStepOneState({
         //   values, errors
         // }))
-        dispatch(setFieldsValues({
-          values, errors
-        }))
+        dispatch(
+          setFieldsValues({
+            values,
+            errors,
+          })
+        );
         if (!StepOne.Zipcode) {
           return false;
         }
         // dispatch(handleSubmitNext());
         break;
-        case 2:
+      case 2:
         errors = validate2(values, [
           "CompositionEvent",
           "Vision",
@@ -177,7 +176,6 @@ const App = () => {
           "PartB",
           "GroceryCard",
         ]);
-        debugger
         console.log(errors);
         // dispatch(
         //   setStepTwoState({
@@ -188,21 +186,21 @@ const App = () => {
         dispatch(
           setFieldsValues({
             ...values,
-            errors
+            errors,
           })
-        )
+        );
         if (
           (!StepTwo.CompositionEvent,
-            !StepTwo.Vision,
-            !StepTwo.Hearing,
-            !StepTwo.PartB,
-            !StepTwo.GroceryCard)
+          !StepTwo.Vision,
+          !StepTwo.Hearing,
+          !StepTwo.PartB,
+          !StepTwo.GroceryCard)
         ) {
           return false;
         }
         break;
-      
-        case 3:
+
+      case 3:
         errors = validate2(values, [
           "Over",
           "Utilities",
@@ -218,15 +216,15 @@ const App = () => {
         );
         if (
           (!StepThree.Over,
-            !StepThree.Utilities,
-            !StepThree.Transportation,
-            !StepThree.Emergency)
+          !StepThree.Utilities,
+          !StepThree.Transportation,
+          !StepThree.Emergency)
         ) {
           return false;
         }
         break;
-      
-        case 4:
+
+      case 4:
         errors = validate2(values, ["Medicare", "Medicaid", "Tricare"]);
         console.log(errors);
         dispatch(
@@ -239,7 +237,7 @@ const App = () => {
           return false;
         }
         break;
-      
+
       //   case 5:  errors = validate2(values, ["doctor", "medications"]);
       // console.log(errors);
       // dispatch(
@@ -252,8 +250,8 @@ const App = () => {
       //   return false;
       // }
       // break;
-      
-        case 6:
+
+      case 6:
         errors = validate2(values, ["doctor", "medications"]);
         console.log(errors);
         dispatch(
@@ -266,13 +264,13 @@ const App = () => {
           return false;
         }
         break;
-      
-        case 7:
+
+      case 7:
         if ((!StepSeven.preferable, !StepSeven.network, !StepSeven.important)) {
           return false;
         }
         break;
-    
+
       // case 8:
       //   if (values.firstName && values.lastName && values.email) {
       //     return true;
@@ -295,97 +293,90 @@ const App = () => {
   };
 
   return (
-    <>
-      <Formik
-        initialValues={{ Zipcode: "" }}
-        validationSchema={advancedSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting, values }) => (
-          <>
-            <Center style={{ overflow: "hidden", marginTop: 50 }}>
-              <div className="paper-container">
-                <Paper
-                  shadow={"xl"}
-                  style={{
-                    overflow: "hidden",
-                    width: "900px",
-                    height: "100%",
-                    padding: 30,
-                    marginTop: 20,
+    <Formik
+      initialValues={{ Zipcode: "" }}
+      validationSchema={advancedSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting, values }) => (
+        <Center>
+          <div className="paper-container">
+            <Paper shadow={"xl"}>
+              <ProgressBar currentStep={step} />
+              <TransitionGroup>
+                <CSSTransition
+                  key={step}
+                  classNames={{
+                    enter: "slider-enter",
+                    enterActive: "slider-enter-active",
+                    exit: "slider-exit",
+                    exitActive: "slider-exit-active",
                   }}
+                  timeout={500}
                 >
-                  <ProgressBar currentStep={step} />
-                  <TransitionGroup>
-                    <CSSTransition
-                      key={step}
-                      classNames={{
-                        enter: "slider-enter",
-                        enterActive: "slider-enter-active",
-                        exit: "slider-exit",
-                        exitActive: "slider-exit-active",
-                      }}
-                      timeout={500}
-                    >
-                      <div className="step-container">
-                        {step === 1 && <StepOne validate={validate} />}
-                        {step === 2 && <StepTwo validate={validate} />}
-                        {step === 3 && <StepThree validate={validate} />}
-                        {step === 4 && <StepFour validate={validate} />}
-                        {step === 5 && <StepFive validate={validate} />}
-                        {step === 6 && <StepSix validate={validate} />}
-                        {step === 7 && <StepSeven validate={validate} />}
-                      </div>
-                    </CSSTransition>
-                  </TransitionGroup>
-                  <div className="button-container">
-                    {/* Previous button */}
-                    {step !== 1 && (
-                      <button type="button" onClick={prevStep}>
-                        Previous
-                      </button>
-                    )}
-                    {/* Next button */}
-
-                    {step !== 7 && (
-                      <button
-                        type="button"
-                        // disabled={!validateStep(values)}
-                        onClick={() => {
-                          nextStep(values);
-                        }}
-                      >
-                        Next
-                      </button>
-                    )}
-                    {/* Submit button */}
-                    {step === 7 && (
-                      <button
-                        onClick={() => {
-                          console.log(
-                            stepOne,
-                            stepFour,
-                            stepFive,
-                            stepSix,
-                            stepSeven,
-                            stepThree,
-                            stepTwo
-                          );
-                        }}
-                        type="submit"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Submitting..." : "Submit"}
-                      </button>
-                    )}
+                  <div className="step-container">
+                    {step === 1 && <StepOne validate={validate} />}
+                    {step === 2 && <StepTwo validate={validate} />}
+                    {step === 3 && <StepThree validate={validate} />}
+                    {step === 4 && <StepFour validate={validate} />}
+                    {step === 5 && <StepFive validate={validate} />}
+                    {step === 6 && <StepSix validate={validate} />}
+                    {step === 7 && <StepSeven validate={validate} />}
                   </div>
-                </Paper>
+                </CSSTransition>
+              </TransitionGroup>
+              <div className="button-container">
+                {/* Previous button */}
+                {step !== 1 && (
+                  <Button
+                    type="button"
+                    onClick={prevStep}
+                    className="primary-btn"
+                  >
+                    Previous
+                  </Button>
+                )}
+                {/* Next button */}
+
+                {step !== 7 && (
+                  <Button
+                    type="button"
+                    // disabled={!validateStep(values)}
+                    onClick={() => {
+                      nextStep(values);
+                    }}
+                    className="primary-btn"
+                  >
+                    Next
+                  </Button>
+                )}
+                {/* Submit button */}
+                {step === 7 && (
+                  <Button
+                    onClick={() => {
+                      console.log(
+                        stepOne,
+                        stepFour,
+                        stepFive,
+                        stepSix,
+                        stepSeven,
+                        stepThree,
+                        stepTwo
+                      );
+                    }}
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="primary-btn"
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                  </Button>
+                )}
               </div>
-            </Center>
-          </>
-        )}
-      </Formik>
-    </>
+            </Paper>
+          </div>
+        </Center>
+      )}
+    </Formik>
   );
 };
 export default App;

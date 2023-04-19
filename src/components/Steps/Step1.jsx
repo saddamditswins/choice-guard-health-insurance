@@ -3,20 +3,18 @@ import { useAppDispatch, useAppSelector } from "../../Redux/store";
 import { setFieldsValues } from "../../Redux/itemsSlice";
 import CustomInput from "../../features/custom-input/CustomInput";
 import { Text } from "@mantine/core";
-import "../../../src/assets/scss/common.scss";
 
 const StepOne = ({ validate }) => {
     const { fieldValues } = useAppSelector((state) => state.item); 
     const dispatch = useAppDispatch();
     return (
       <>
-        <Text className="textBox">
+        <Text className="text-box">
           <span>
             Zip Code <span className="color-red">*</span>
           </span>
         </Text>
         <CustomInput
-          className="input-height"
           name="Zipcode"
           type="number"
           placeholder="Enter your Zipcode"
