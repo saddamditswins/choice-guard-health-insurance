@@ -72,6 +72,7 @@ const PrescriptionField = ({ label, placeholder, data }) => {
           Make sure your drugs are covered. Start typing the name of the drug in
           the field above and then select it as it appears here.
         </p>
+        <div className="mb-1">
         <TextInput
           type="text"
           id="autocomplete"
@@ -79,7 +80,17 @@ const PrescriptionField = ({ label, placeholder, data }) => {
           value={inputValue}
           onChange={handleInputChange}
         />
-        <div style={{ marginTop: "1em" }}>
+        {filteredData.length > 0 && (
+          <ul className="autocomplete-items">
+            {filteredData.map((item) => (
+              <li key={item} onClick={() => handleItemClick(item)}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+        </div>
+        <div>
           {selectedItem && (
             <div>
               {isPrescriptionAdded ? (
@@ -171,15 +182,6 @@ const PrescriptionField = ({ label, placeholder, data }) => {
             </div>
           )}
         </div>
-        {filteredData.length > 0 && (
-          <ul className="autocomplete-items">
-            {filteredData.map((item) => (
-              <li key={item} onClick={() => handleItemClick(item)}>
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     </>
   );

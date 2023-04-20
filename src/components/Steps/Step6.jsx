@@ -111,9 +111,7 @@ const StepSix = ({ validate }) => {
               </div>
               {/* {stepSix.errors?.doctor && (
                   <p
-                    style={{
-                      color: "red",
-                      fontStyle: "italic",
+                    className="error-validation"
                     }}
                   >
                     {stepSix.errors?.doctor}
@@ -234,10 +232,7 @@ const StepSix = ({ validate }) => {
               </div>
               {/* {stepSix?.errors?.medications && (
                   <p
-                    style={{
-                      color: "red",
-                      fontStyle: "italic",
-                    }}
+                     className="error-validation"
                   >
                     {stepSix?.errors?.medications}
                   </p>
@@ -283,7 +278,6 @@ const StepSix = ({ validate }) => {
                             <div className="text-center">
                               <Button
                                 onClick={handleCloseModal1}
-                                // style={styles.closeButton}
                                 className="primary-btn"
                               >
                                 Done

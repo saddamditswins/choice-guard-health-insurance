@@ -173,7 +173,7 @@ const StepThree = ({ validate }) => {
             </div>
 
             <TransitionGroup>
-              {showTravelOptions && (
+              {!showTravelOptions && (
                 <CSSTransition classNames="popover" timeout={300}>
                   <Popover
                     position="top"

@@ -204,7 +204,7 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
 
                           <div className="actions">
                             <Text onClick={() => handleDelete()}>
-                              <FaTimes style={{ marginRight: 5 }} />
+                              <FaTimes />
                               Delete
                             </Text>
                           </div>

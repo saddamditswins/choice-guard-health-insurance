@@ -101,7 +101,7 @@ const StepSeven = ({ validate }) => {
                 <Text className="text-box">
                   Which network type would you prefer?
                 </Text>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div>
                   <CustomRadio
                     {...field}
                     id="travel1"
@@ -150,7 +150,7 @@ const StepSeven = ({ validate }) => {
             </>
           )}
         </Field>
-        {field3 && (
+        {!field3 && (
           <>
             <Field validate={validate}>
               {({ field }) => (
@@ -168,7 +168,7 @@ const StepSeven = ({ validate }) => {
                     <Field validate={validate}>
                       {({ field, form }) => (
                         <>
-                          <div>
+                          <div className="mb-1">
                             <div>
                               <CustomRadio
                                 {...field}
@@ -187,7 +187,7 @@ const StepSeven = ({ validate }) => {
                                   );
                                 }}
                                 name="travel"
-                                label=" I am flexible on all of my doctors"
+                                label="I am flexible on all of my doctors"
                               />
                             </div>
 
@@ -219,18 +219,12 @@ const StepSeven = ({ validate }) => {
                                 <Popover
                                   position="top"
                                   target={
-                                    <Button
-                                      variant="outline"
-                                      color="gray"
-                                      style={{ marginTop: "10px" }}
-                                    >
+                                    <Button variant="outline" color="gray">
                                       Select travel options
                                     </Button>
                                   }
                                 >
-                                  <div
-                                    style={{ padding: "4px", marginTop: 10 }}
-                                  >
+                                  <div className="mb-1">
                                     <Text className="text-box">
                                       Please select which doctors/providers you
                                       must keep:
@@ -252,56 +246,28 @@ const StepSeven = ({ validate }) => {
             </Field>
           </>
         )}
-        {field2 && (
+        {!field2 && (
           <>
             <Field validate={validate}>
               {({ field }) => (
                 <>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "2px",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontWeight: 600,
-                        color: "#495057",
-                        marginTop: "30px",
-                        fontFamily: "Montserrat, sans-serif",
-                        marginBottom: "8px",
-                        fontSize: "16px",
-                      }}
-                    >
+                  <div>
+                    <Text className="text-box">
                       <span>
-                        {" "}
                         For some, extra benefits and savings can be more
                         important than keeping certain prescription. Often
                         times, prescription can be subsitituted for other brands
-                        or drugs that treat the same condition{" "}
-                        <span style={{ color: "red" }}>*</span>{" "}
+                        or drugs that treat the same condition
+                        <span className="red">*</span>
                       </span>
                     </Text>
 
                     <Field validate={validate}>
                       {({ field, form }) => (
                         <>
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              gap: "2px",
-                            }}
-                          >
-                            <div
-                              style={{
-                                alignItems: "center",
-                                flexDirection: "row",
-                                display: "flex",
-                              }}
-                            >
-                              <Radio
+                          <div className="mb-1">
+                            <div>
+                              <CustomRadio
                                 {...field}
                                 className="radio-button"
                                 value="yes"
@@ -318,28 +284,13 @@ const StepSeven = ({ validate }) => {
                                   );
                                 }}
                                 name="travel"
+                                label=" I am ok substituting any drug my doctor
+                                authorizes"
                               />
-                              <Text
-                                style={{
-                                  fontSize: "16px",
-                                  fontFamily: "Montserrat",
-                                  marginLeft: "5px",
-                                }}
-                              >
-                                I am ok substituting any drug my doctor
-                                authorizes{" "}
-                              </Text>
                             </div>
 
-                            <div
-                              style={{
-                                alignItems: "center",
-
-                                flexDirection: "row",
-                                display: "flex",
-                              }}
-                            >
-                              <Radio
+                            <div>
+                              <CustomRadio
                                 {...field}
                                 className="radio-button"
                                 value="no"
@@ -356,17 +307,9 @@ const StepSeven = ({ validate }) => {
                                   );
                                 }}
                                 name="travel"
+                                label="  I have at least one prescription that can't be
+                                substituted"
                               />
-                              <Text
-                                style={{
-                                  fontSize: "16px",
-                                  fontFamily: "Montserrat",
-                                  marginLeft: "5px",
-                                }}
-                              >
-                                I have at least one prescription that can't be
-                                substituted
-                              </Text>
                             </div>
                           </div>
                           <TransitionGroup>
@@ -375,33 +318,16 @@ const StepSeven = ({ validate }) => {
                                 <Popover
                                   position="top"
                                   target={
-                                    <Button
-                                      variant="outline"
-                                      color="gray"
-                                      style={{ marginTop: "10px" }}
-                                    >
+                                    <Button variant="outline" color="gray">
                                       Select travel options
                                     </Button>
                                   }
                                 >
-                                  <div
-                                    style={{ padding: "4px", marginTop: 10 }}
-                                  >
-                                    <Text
-                                      style={{
-                                        fontWeight: "600we",
-                                        color: "#495057",
-                                        fontFamily: "Montserrat, sans-serif",
-                                        marginBottom: "8px",
-                                        fontSize: "16px",
-                                      }}
-                                    >
-                                      {" "}
+                                  <div>
+                                    <Text className="text-box">
                                       Please select which prescriptions you must
                                       keep:
-                                      <span style={{ color: "red" }}>
-                                        *
-                                      </span>{" "}
+                                      <span className="red">*</span>
                                     </Text>
 
                                     <MultiSelect data={data} />

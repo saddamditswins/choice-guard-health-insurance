@@ -6,15 +6,10 @@ const Modal1 = () => {
   return (
     <Modal centered size="xl" opened={isModalOpen} onClose={handleCloseModal}>
       <div
-        style={{
-          display: "flex",
-          gap: "14px",
-          flexDirection: "column",
-          height: "100%",
-        }}
+      
       >
-        <div style={{ marginBottom: "4rem" }}>
-          <h2 style={{ textAlign: "center" }}>My Doctors</h2>
+        <div >
+          <h2>My Doctors</h2>
           <Autocomplete
             color="#495057"
             label="Doctor's City or ZiP Code"
