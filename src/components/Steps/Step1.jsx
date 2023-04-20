@@ -29,14 +29,6 @@ const StepOne = ({ validate }) => {
             {setFieldsValues?.errors?.Zipcode}
           </p>
         )} */}
-      <Select
-        mt="md"
-        withinPortal
-        data={["React", "Angular", "Svelte", "Vue"]}
-        placeholder="Pick one"
-        label="Your favorite library/framework"
-        required
-      />
     </>
   );
 };
