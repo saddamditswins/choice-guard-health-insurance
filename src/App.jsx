@@ -297,6 +297,7 @@ const App = () => {
     <MantineProvider
     theme={{
       fontFamily: '"Montserrat", sans-serif',
+      headings: { fontFamily: '"Montserrat", sans-serif' },
     }}
   >
     <Formik
