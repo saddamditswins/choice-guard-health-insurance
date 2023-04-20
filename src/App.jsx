@@ -47,6 +47,7 @@ import {
   Modal,
   Divider,
   TextInput,
+  MantineProvider,
 } from "@mantine/core";
 
 function validate2(data, required) {
@@ -293,6 +294,11 @@ const App = () => {
   };
 
   return (
+    <MantineProvider
+    theme={{
+      fontFamily: '"Montserrat", sans-serif',
+    }}
+  >
     <Formik
       initialValues={{ Zipcode: "" }}
       validationSchema={advancedSchema}
@@ -377,6 +383,7 @@ const App = () => {
         </Center>
       )}
     </Formik>
+    </MantineProvider>
   );
 };
 export default App;
