@@ -233,7 +233,7 @@ const StepSix = ({ validate }) => {
                     <Radio value="Yes"> Yes </Radio>
                     <Radio value="No"> No </Radio>
                 </Radio.Group>
-            </Form.Item>
+              </Form.Item>
                 <TransitionGroup>
                   {doctorMedicationsData === "Yes" && (
                     <CSSTransition classNames="popover1" timeout={300}>
@@ -321,7 +321,8 @@ const StepSix = ({ validate }) => {
                               />
                               <Button
                                 onClick={handleCloseModal1}
-                                style={styles.closeButton}
+                                // style={styles.closeButton}
+                                className="primary-btn"
                               >
                                 Done
                               </Button>
@@ -358,73 +359,10 @@ const StepSix = ({ validate }) => {
           onClose={handleCloseDrawer}
           title=""
         >
-          <h4
-            sx={{ marginBottom: "16px", textAlign: "center", fontSize: "24px" }}
-          >
-            Are you sure you want to continue to log into Medicare.gov?
-          </h4>
-          <p sx={{ marginBottom: "16px", fontSize: "16px" }}>
-            You are about to log in to Medicare.gov.
-          </p>
-          <p sx={{ marginBottom: "16px", fontSize: "16px" }}>
-            With your authorization, we will access your data and import the
-            history of your drug prescriptions.
-          </p>
-          <p sx={{ marginBottom: "16px", fontSize: "16px" }}>
-            You will be able to edit imported drugs in our system.
-          </p>
-          <Box sx={{ marginBottom: "16px", shadow: 10 }}>
-            <Image
-              src={page}
-              alt=""
-              sx={{ width: "100%", height: "auto", margin: "5px" }}
-            />
-          </Box>
-          <p sx={{ marginBottom: "16px", fontSize: "16px" }}>
-            After pressing Continue, you will leave this website.
-          </p>
-          <p sx={{ marginBottom: "46px", fontSize: "16px" }}>
-            Please review our Privacy Policy and Terms of Service.
-          </p>
-          <p
-            sx={{
-              fontSize: 12,
-              color: " #969799",
-              marginBottom: "35px",
-              fontStyle: "italic",
-            }}
-          >
-            This product uses the Blue Button 2.0 APIs but is not endorsed or
-            certified by the Centers for Medicare & Medicaid Services or the U.S.
-            Department of Health and Human Services.
-          </p>
-  
-          <Button
-            component="a"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.medicare.gov/account/login/?client_id=bb2api&redirect_uri=https%3A%2F%2Fapi.bluebutton.cms.gov%2Fmymedicare%2Fsls-callback&relay=10973492321578559514262006"
-            styles={(theme) => ({
-              root: {
-                textDecoration: "none",
-                boxShadow: "inset 0px 0px 0px 1px #3bac46",
-                padding: "12px 24px",
-                backgroundColor: "#3bac46",
-                border: 0,
-                borderColor: "#3bac46",
-                "&:not([data-disabled])": theme.fn.hover({
-                  backgroundColor: theme.fn.darken("#3bac46", 0.05),
-                  color: "white",
-                }),
-              },
-            })}
-          >
-            Continue
-          </Button>
-        </Modal>
-      </div>
-    );
-  };
+          Continue
+      </Modal>
+    </div>
+  );
+};
 
-  export default StepSix;
-  
+export default StepSix;

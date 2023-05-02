@@ -140,5 +140,4 @@ const StepFive = ({ validate, chronic, planType, setPlanType }) => {
     );  
   };
 
-  export default StepFive;
-  
+export default StepFive;

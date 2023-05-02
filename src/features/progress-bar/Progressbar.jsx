@@ -1,5 +1,4 @@
 import React from "react";
-import "./Progressbar.css"
 const ProgressBar = ({ currentStep }) => {
   const progress = currentStep * 12.5
   return (

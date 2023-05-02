@@ -1,24 +1,13 @@
-import "../prescription/Prescription.css";
-import CustomInput from "../custom-input/CustomInput";
 import React, { useState } from "react";
-import { FaChevronDown, FaSearch, FaTimes } from "react-icons/fa";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
 import {
-  Paper,
-  Select,
-  Title,
-  Button,
-  Image,
-  Box,
   Radio,
   TextInput,
   Group,
   Text,
   Autocomplete,
-  Center,
-  Modal,
   Divider,
-  Textarea,
 } from "@mantine/core";
 import StepOne from "../../components/Steps/Step1";
 import { setDoctorAddress, setDistance, setDoctorName } from "../../Redux/DoctorSlice";
@@ -223,211 +212,119 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
                           </Text>
                         </div>
 
-                        <div
-                          style={{
-                            flex: 1,
-                            display: "flex",
-                            justifyContent: "flex-end",
-                          }}
-                        >
-                          <Text
-                            style={{
-                              width: "auto",
-                              color: "#19499e",
-                              fontSize: "19px",
-                              border: "none",
-                              borderRadius: "5px",
-                              marginLeft: 10,
-                            }}
-                            onClick={handleShowContent}
-                          >
-                            <FaSearch style={{ marginRight: "5px" }} />
-                            Edit
-                          </Text>
-                          <Text
-                            style={{
-                              width: "auto",
-                              color: "#19499e",
-                              fontSize: "19px",
-                              border: "none",
-                              borderRadius: "5px",
-                              marginLeft: 10,
-                            }}
-                            onClick={() => handleDelete()}
-                          >
-                            <FaTimes style={{ marginRight: 5 }} />
-                            Delete
-                          </Text>
-                        </div>
+                      <div className="actions">
+                        <Text onClick={handleShowContent}>
+                          <FaSearch />
+                          Edit
+                        </Text>
+                        <Text onClick={() => handleDelete()}>
+                          <FaTimes />
+                          Delete
+                        </Text>
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <div>
-                    {isContentVisible ? (
+                </div>
+              ) : (
+                <div>
+                  {isContentVisible ? (
+                    <div>
                       <div>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                          }}
-                        >
-                          <h3>
-                            <strong>Doctor {selectedItem}</strong>
-                          </h3>
-                        </div>
-                        <h3>Select office location</h3>
+                        <h3>Doctor {selectedItem}</h3>
+                      </div>
+                      <h3>Select office location</h3>
+                      <Text>A doctor's Insurance coverage may differ by location. You can change this at anytime</Text>
+                      <div className="d-flex justify-between">
                         <Radio.Group
                           name="favoriteFramework"
-                          label="A doctor's Insurance coverage may differ by location. You can change this at anytime"
                           withAsterisk
                         >
-                          <Group mt="xs">
+                          <Group mt="xs" className="custom-radio">
                             <div>
                               <Radio
-                                style={{ marginBottom: 10 }}
                                 value="9901"
                                 label="9901 Paramount Blvd, Ste 116"
                               />
                               <Radio
-                                style={{ marginBottom: 10 }}
                                 value="9902"
                                 label="9902 Paramount Blvd, Ste 116"
                               />
                               <Radio
-                                style={{ marginBottom: 10 }}
                                 value="9003"
                                 label="9003 Paramount Blvd, Ste 116"
                               />
                             </div>
-
-                            <div
-                              style={{
-                                display: "flex",
-                                marginTop: "-50px",
-                                marginLeft: "380px",
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  width: "auto",
-                                  color: "#19499e",
-                                  fontSize: "19px",
-                                  border: "none",
-                                  padding: "10px 20px",
-                                  borderRadius: "5px",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                }}
-                                onClick={() => handleDelete()}
-                              >
-                                <FaTimes style={{ marginRight: 5 }} />
-                                Delete
-                              </Text>
-                            </div>
                           </Group>
                         </Radio.Group>
+                        <div className="actions">
+                          <Text onClick={() => handleDelete()}>
+                            <FaTimes />
+                            Delete
+                          </Text>
+                        </div>
+                      </div>
+                      <div className="text-center mb-1">
                         <button
-                          style={{
-                            backgroundColor: "#3bac46",
-                            borderRadius: "3px",
-                            color: "#fff",
-                            marginLeft: "40%",
-                            outline: "none",
-                          }}
+                          className="primary-btn"
                           onClick={handleAddDoctor}
                         >
                           {isPrescriptionAdded ? "Added" : "Add Provider"}
                         </button>
                       </div>
-                    ) : (
-                      <>
+                    </div>
+                  ) : (
+                    <>
+                      <div>
                         <div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                            }}
-                          >
-                            <h3>
-                              <strong>Doctor {selectedItem}</strong>
-                            </h3>
-                          </div>
-                          <h3>Select office location</h3>
+                          <h3>Doctor {selectedItem}</h3>
+                        </div>
+                        <h3>Select office location</h3>
+                        <Text>A doctor's Insurance coverage may differ by location. You can change this at anytime</Text>
+                        <div className="d-flex justify-between">
                           <Radio.Group
                             name="favoriteFramework"
-                            label="A doctor's Insurance coverage may differ by location. You can change this at anytime"
                             withAsterisk
                           >
-                            <Group mt="xs">
+                            <Group mt="xs" className="custom-radio">
                               <div>
                                 <Radio
-                                  style={{ marginBottom: 10 }}
                                   value="9901"
                                   label="9901 Paramount Blvd, Ste 116"
                                 />
                                 <Radio
-                                  style={{ marginBottom: 10 }}
                                   value="9902"
                                   label="9902 Paramount Blvd, Ste 116"
                                 />
                                 <Radio
-                                  style={{ marginBottom: 10 }}
                                   value="9003"
                                   label="9003 Paramount Blvd, Ste 116"
                                 />
                               </div>
-
-                              <div
-                                style={{
-                                  display: "flex",
-                                  marginTop: "-50px",
-                                  marginLeft: "380px",
-                                }}
-                              >
-                                <Text
-                                  style={{
-                                    width: "auto",
-                                    color: "#19499e",
-                                    fontSize: "19px",
-                                    border: "none",
-                                    padding: "10px 20px",
-                                    borderRadius: "5px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                  }}
-                                  onClick={() => handleDelete()}
-                                >
-                                  <FaTimes style={{ marginRight: 5 }} />
-                                  Delete
-                                </Text>
-                              </div>
                             </Group>
                           </Radio.Group>
+
+                          <div className="actions">
+                            <Text onClick={() => handleDelete()}>
+                              <FaTimes style={{ marginRight: 5 }} />
+                              Delete
+                            </Text>
+                          </div>
                         </div>
+                      </div>
+                      <div className="text-center mb-1">
                         <button
-                          style={{
-                            backgroundColor: "#3bac46",
-                            borderRadius: "3px",
-                            color: "#fff",
-                            outline: "none"
-                            ,
-                            marginLeft: "40%",
-                          }}
+                          className="primary-btn"
                           onClick={handleAddDoctor}
                         >
                           {isPrescriptionAdded ? "Added" : "Add Provider"}
                         </button>
-                      </>
-                    )}
-                  </div>
-                )}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
               </div>
-            </div>
+              </div>
           )}
         </div>
         {filteredData.length > 0 && (

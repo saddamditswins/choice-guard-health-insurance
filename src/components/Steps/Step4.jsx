@@ -95,15 +95,14 @@ const StepFour = ({ validate }) => {
                   <Radio value="preferNottoAnswer"> Prefer Not to Answer </Radio>
                 </Radio.Group>
               </Form.Item>      
-            <Text className="paragraph-align-two">
-              Chronic Special Needs plans may offer additional benefits for those with
-              chronic conditions. These plans require a chronic condition for <br />
-              enrollment. This question is not required and is only used to determine
-              eligibility in a Chronic Special Needs plan/benefits.
-            </Text>
+              <Text className="paragraph-align-two">
+                Chronic Special Needs plans may offer additional benefits for those with
+                chronic conditions. These plans require a chronic condition for <br />
+                enrollment. This question is not required and is only used to determine
+                eligibility in a Chronic Special Needs plan/benefits.
+              </Text>
           </>
-        );
-      };
+  );
+};
 
-  export default StepFour;
-  
+export default StepFour;

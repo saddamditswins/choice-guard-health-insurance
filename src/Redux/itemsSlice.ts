@@ -1,5 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface fieldValues {
+    Zipcode: string,
+    CompositionEvent: string,
+    Vision: string,
+    Hearing: string,
+    PartB: string,
+    GroceryCard: string,
+    
+    Over: string,
+    Utilities: string,
+    Transportation: string,
+    Emergency: string,
+    USA: string,
+    USA1: string,
+    world: string,
+
+    Medicare: string,
+    Medicaid: string,
+    Tricare: string,
+    chronic: string,
+    
+    MedicareValue: string,
+    Supplement: string,
+    Employer: string,
+    Prescription: string,
+    Other: string,
+    NewField: string,
+    None: string,
+
+    doctor: string,
+    distance: string,
+    doctorname: string,
+    address: string,
+    medications: string,
+    medicinename: string,
+    dosage: string,
+    quantity: string,
+    frequency: string,
+
+    preferable: string,
+    network: string,
+    important: string,
+    errors: any
+}
 interface stepOne {
   Zipcode: string;
 }

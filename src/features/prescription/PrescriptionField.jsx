@@ -1,25 +1,9 @@
-import "./Prescription.css";
 import React, { useState } from "react";
 import { FaChevronDown, FaPencilAlt, FaTimes } from "react-icons/fa";
 import { PrescriptionItem } from "../../Redux/PrescriptionSlice";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
 
-import {
-  Paper,
-  Select,
-  NativeSelect,
-  Button,
-  Image,
-  Box,
-  Radio,
-  TextInput,
-  Text,
-  Autocomplete,
-  Center,
-  Modal,
-  Divider,
-  Textarea,
-} from "@mantine/core";
+import { Select, NativeSelect, TextInput, Text, Divider } from "@mantine/core";
 
 const PrescriptionField = ({ label, placeholder, data }) => {
   const dispatch = useAppDispatch();
@@ -79,11 +63,9 @@ const PrescriptionField = ({ label, placeholder, data }) => {
   };
   return (
     <>
-      <div style={{ position: "relative" }}>
-        <label style={{ fontSize: "19px" }} htmlFor="autocomplete">
-          {label}
-        </label>
-        <p style={{ fontSize: "12px" }}>
+      <div className="custom-modal prescription-modal">
+        <h3 htmlFor="autocomplete">{label}</h3>
+        <p className="sub-heading">
           Make sure your drugs are covered. Start typing the name of the drug in
           the field above and then select it as it appears here.
         </p>
@@ -92,7 +74,6 @@ const PrescriptionField = ({ label, placeholder, data }) => {
           id="autocomplete"
           placeholder={placeholder}
           value={inputValue}
-          style={{ fontSize: "19px", width: "98%" }}
           onChange={handleInputChange}
           name="prescriptionName"
         />
@@ -101,99 +82,36 @@ const PrescriptionField = ({ label, placeholder, data }) => {
             <div>
               {isPrescriptionAdded ? (
                 <div>
-                  <Text
-                    bold
-                    style={{
-                      color: " #969799",
-                      fontSize: 19,
-                    }}
-                  >
-                    1 Prescription entered
-                  </Text>
+                  <Text className="names">1 Prescription entered</Text>
                   <Divider my="sm" />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        flex: 1,
-                        color: " #969799",
-                        fontSize: 19,
-                      }}
-                    >
+                  <div className="d-flex justify-between">
+                    <div className="names">
                       <Text>lisinopril</Text>
                       <Text>Generic</Text>
-                    </div>
-                    <div
-                      style={{
-                        flex: 1,
-                        color: " #969799",
-                        fontSize: 19,
-                        flex: 1, // Add this line
-                      }}
-                    >
                       <Text>lisinopril 10 MG</Text>
                       <Text>1 Per Day</Text>
                     </div>
-                    <div
-                      style={{
-                        flex: 1,
-                        display: "flex",
-                        justifyContent: "flex-end",
-                      }}
-                    >
-                      <Text
-                        className="button1"
-                        style={{
-                          width: "auto",
-                          color: "#19499e",
-                          fontSize: "19px",
-                          border: "none",
-                          borderRadius: "5px",
-                          marginLeft: "240px",
-                          marginTop: "-12px",
-                        }}
-                        onClick={() => setIsPrescriptionAdded(false)}
-                      >
-                        <FaPencilAlt style={{ marginRight: "5px" }} />
+                    <div className="actions">
+                      <Text onClick={() => setIsPrescriptionAdded(false)}>
+                        <FaPencilAlt />
                         Edit
                       </Text>
-                      <Text
-                        style={{
-                          width: "auto",
-                          color: "#19499e",
-                          fontSize: "19px",
-                          border: "none",
-                          borderRadius: "5px",
-                          marginLeft: 10,
-                        }}
-                        onClick={() => handleDelete()}
-                      >
-                        <FaTimes style={{ marginRight: 5 }} />
+                      <Text onClick={() => handleDelete()}>
+                        <FaTimes />
                         Delete
                       </Text>
                     </div>
                   </div>
                 </div>
               ) : (
-                <div>
+                <div className="mb-1">
                   {/* Content to display before prescription is added */}
-                  <h3 bold>Prescription details</h3>
-                  <Text
-                    style={{
-                      lineHeight: "1.5",
-                      color: " #969799",
-                      fontSize: 12,
-                      marginTop: 12,
-                    }}
-                  >
+                  <h3>Prescription details</h3>
+
+                  <p className="sub-heading">
                     Providing your prescription details allows us to uncover the
                     most accurate Medicare plan pricing
-                  </Text>
+                  </p>
                   <Text
                     style={{
                       marginTop: 10,
@@ -224,23 +142,19 @@ const PrescriptionField = ({ label, placeholder, data }) => {
                     }}
                   >
                     <div>
-                      <Text>Quantity</Text>
+                      <Text className="text-box">Quantity</Text>
                       <TextInput
                         name="quantity"
                         onChange={(v) => {
                           dispatch(setStepSix({ quantity: v.target.value }))
                         }}
-                        defaultValue={1} style={{ width: "60px" }} />
+                        defaultValue={1}
+                        style={{ width: "60px" }}
+                      />
                     </div>
-                    <Text
-                      style={{
-                        margin: "20px 25px  10px ",
-                      }}
-                    >
-                      per
-                    </Text>
+                    <Text className="text-box end-text">per</Text>
                     <div>
-                      <Text>Frequency</Text>
+                      <Text className="text-box">Frequency</Text>
                       <NativeSelect
                         placeholder="Pick one"
                         data={[
@@ -256,18 +170,15 @@ const PrescriptionField = ({ label, placeholder, data }) => {
                         }}
                       />
                     </div>
+                    <div className="end-text">
+                      <button
+                        className="primary-btn"
+                        onClick={handleAddPrescription}
+                      >
+                        {isPrescriptionAdded ? "Added" : "Add  Prescription"}
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    className="button1"
-                    style={{
-                      backgroundColor: "#3bac46",
-                      color: "#fff",
-                      outline: "none"
-                    }}
-                    onClick={handleAddPrescription}
-                  >
-                    {isPrescriptionAdded ? "Added" : "ADD  Prescription"}
-                  </button>
                 </div>
               )}
             </div>

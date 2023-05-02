@@ -1,4 +1,3 @@
-import "./CustomInput.css";
 import { TextInput } from "@mantine/core";
 import { useField } from "formik";
 
@@ -28,8 +27,6 @@ const CustomInput = ({ label, onTextChange, ...props }) => {
         // className={`input-with-placeholder ${meta.touched && meta.error ? "input-error" : ""}`}
 
       />
-
-
     </>
   );
 };

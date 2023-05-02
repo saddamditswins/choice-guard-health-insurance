@@ -100,7 +100,6 @@ const StepSeven = ({ validate }) => {
                     </Radio.Group>
               </Form.Item>
               </div>
-          {/* First part complete */}
 
           {visible1 === true &&(
             <div
@@ -278,8 +277,7 @@ const StepSeven = ({ validate }) => {
             </div>
           )}
       </div>
-    );
-  };
+  );
+};
 
-  export default StepSeven;
-  
+export default StepSeven;

@@ -1,4 +1,3 @@
-import "./CustomSelect.css";
 import { useField } from "formik";
 
 const CustomSelect = ({ label, ...props }) => {
