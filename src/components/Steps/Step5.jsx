@@ -109,7 +109,6 @@ const StepFive = ({ validate, chronic, planType, setPlanType }) => {
                  label: "Cardiovascular Disease" 
                 },
               ]}
-              label="Select Options"
               placeholder="Select from the following list"
               value={planType}
               onChange={(e) => onChangePlanType(e)}
