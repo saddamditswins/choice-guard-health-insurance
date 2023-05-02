@@ -53,7 +53,6 @@ const StepTwo = ({ validate, errors }) => {
       const dispatch = useAppDispatch();
 
       const onChangeCompositionEvent = (e) => {
-        debugger
         setVal(e.target.value);
       }
 

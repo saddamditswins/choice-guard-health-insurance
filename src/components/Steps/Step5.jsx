@@ -9,7 +9,6 @@ import { Form, Input, Select, Typography } from 'antd';
 
 const StepFive = ({ validate, chronic, planType, setPlanType }) => {
     const { stepFive, field } = useAppSelector((state) => state.item);
-
     const { Option } = Select;
     const options = [
         { value: "medicare", label: "Medicare" },
@@ -20,7 +19,7 @@ const StepFive = ({ validate, chronic, planType, setPlanType }) => {
         { value: "newField", label: "NewField" },
         { value: "none", label: "None" },
         { value: "doctor", label: "Doctor" },
-  ];
+    ];
     
     const [ medicare, setMedicare ] = useState(false);
     const [ supplement, setSupplement ] = useState(false);
@@ -110,9 +109,23 @@ const StepFive = ({ validate, chronic, planType, setPlanType }) => {
                  label: "Cardiovascular Disease" 
                 },
               ]}
+              label="Select Options"
               placeholder="Select from the following list"
+              value={planType}
               onChange={(e) => onChangePlanType(e)}
+              limit={7}
             />
+
+        {/* <MultiSelect
+              data={options}
+              label="Select Options"
+              placeholder="Select Options"
+              value={selectedValues}
+              onChange={handleSelectionChange}
+              searchable
+              clearable
+              limit={3}
+    /> */}
           {planType.map((item) => {
               if(item === "None"){
                   return null;
