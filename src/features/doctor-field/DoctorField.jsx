@@ -12,6 +12,7 @@ import {
 import StepOne from "../../components/Steps/Step1";
 import { setDoctorAddress, setDistance, setDoctorName } from "../../Redux/DoctorSlice";
 import { Form, Input, Typography } from 'antd';
+import CustomInput from "../custom-input/CustomInput";
 
 const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
   const [inputValue, setInputValue] = useState("");

@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { CustomInput } from "../../features/custom-input/CustomInput";
+import CustomInput  from "../../features/custom-input/CustomInput";
 import { Button, Text } from "@mantine/core";
 import "../../../src/assets/scss/common.scss";
 import {  message, Steps, Layout, Form, Row } from 'antd';
