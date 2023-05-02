@@ -2,7 +2,6 @@ import "./Prescription.css";
 import React, { useState } from "react";
 import { FaChevronDown, FaPencilAlt, FaTimes } from "react-icons/fa";
 import { PrescriptionItem } from "../../Redux/PrescriptionSlice";
-import { setStepOneState, setStepSixState } from "../../Redux/itemsSlice";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
 
 import {
@@ -25,7 +24,6 @@ import {
 const PrescriptionField = ({ label, placeholder, data }) => {
   const dispatch = useAppDispatch();
   const [isPrescriptionVisible, setIsPrescriptionVisible] = useState(false);
-
   const [inputValue, setInputValue] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
@@ -35,7 +33,6 @@ const PrescriptionField = ({ label, placeholder, data }) => {
   const { stepOne, stepSix } = useAppSelector((state) => state.item);
 
   const handleInputChange = (event) => {
-
     const value = event.target.value;
     setInputValue(value);
     const filteredItems = data.filter((item) =>
@@ -48,11 +45,10 @@ const PrescriptionField = ({ label, placeholder, data }) => {
     );
     if (selectedItem) {
       setSelectedItem(selectedItem);
+      dispatch(setStepSix({ prescriptionName: event.target.value }))
     } else {
       setSelectedItem("");
     }
-    dispatch(setStepSixState({ medicinename: v.target.value }));
-
   };
 
   const handleItemClick = (item) => {
@@ -64,17 +60,14 @@ const PrescriptionField = ({ label, placeholder, data }) => {
     setSelectedItem(null); // remove the selected item
   };
   const handleAddPrescription = () => {
-    dispatch(PrescriptionItem(selectedItem));
+    dispatch(setStepSix(selectedItem))
     setIsPrescriptionAdded(true);
     setShowModalContent(false);
   };
 
-
-
-
   const handleSelect = (value) => {
     setSelectedValue(value);
-    dispatch(setStepOneState({ dosage: value.target.value }));
+    dispatch(setStepSix({ dosage: value }))
   };
 
   const handleShowPrescription = () => {
@@ -101,7 +94,7 @@ const PrescriptionField = ({ label, placeholder, data }) => {
           value={inputValue}
           style={{ fontSize: "19px", width: "98%" }}
           onChange={handleInputChange}
-
+          name="prescriptionName"
         />
         <div style={{ marginTop: "1em" }}>
           {selectedItem && (
@@ -214,10 +207,8 @@ const PrescriptionField = ({ label, placeholder, data }) => {
                     style={{
                       width: "50%",
                       fontSize: "19px",
-
                     }}
-                    defaultValue={stepSix.dosage}
-
+                    name={"step6.dosage"}
                     placeholder="Pick one"
                     data={[
                       { value: "Vyvanse", label: "Vyvanse 250G" },
@@ -235,8 +226,9 @@ const PrescriptionField = ({ label, placeholder, data }) => {
                     <div>
                       <Text>Quantity</Text>
                       <TextInput
+                        name="quantity"
                         onChange={(v) => {
-                          dispatch(setStepSixState({ Zipcode: v.target.value }));
+                          dispatch(setStepSix({ quantity: v.target.value }))
                         }}
                         defaultValue={1} style={{ width: "60px" }} />
                     </div>
@@ -259,6 +251,9 @@ const PrescriptionField = ({ label, placeholder, data }) => {
                         rightSection={
                           <FaChevronDown style={{ pointerEvents: "none" }} />
                         }
+                        onChange={(e) => {
+                          dispatch(setStepSix({ frequency: e.target.value }));
+                        }}
                       />
                     </div>
                   </div>
@@ -293,21 +288,3 @@ const PrescriptionField = ({ label, placeholder, data }) => {
 };
 
 export default PrescriptionField;
-{
-  /* <div className="App">
-{isPrescriptionVisible && (
-  <>
-  
-    <h3>Select Medication</h3>
-    <p>Some medication list here...</p>
-    <button onClick={handleHidePrescription}>
-      Hide Prescription
-    </button>
-  </>
-)}
-
-
-
-
-</div> */
-}

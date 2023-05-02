@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepSixState, setField3, setField2 } from "../../Redux/itemsSlice";
 import { Text, Divider, Modal, Box, Button, Popover, Image,  } from "@mantine/core";
 import { Field } from "formik";
 import PrescriptionField from "../../features/prescription/PrescriptionField";
@@ -8,17 +7,14 @@ import DoctorField from "../../features/doctor-field/DoctorField";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import CustomRadio from "../../features/custom-radio/CustomRadio";
 import page from "../../assets/Page.png";
+import { Form, Input, Card, Radio, Typography } from 'antd';
 
 const StepSix = ({ validate }) => {
-    const { stepSix } = useAppSelector((state) => state.item);
-    const dispatch = useAppDispatch();
-    const [secondModal, setSecondModal] = useState(false);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [showTravelOptions, setShowTravelOptions] = useState(false);
-    const [showTravelOptions1, setShowTravelOptions1] = useState(false);
-  
-    const [showModal, setShowModal] = useState(false);
-    const [showModal1, setShowModal1] = useState(false);
+    const [ doctorData, setDoctorData ] = useState(false);
+    const [ doctorMedicationsData, setDoctorMedicationsData ] = useState(false);
+    const [ isDrawerOpen, setIsDrawerOpen ] = useState(false);
+    const [ showModal1, setShowModal1 ] = useState(false);
+    const [ doctorModal, setDoctorModal ] = useState(false);
   
     const data = ["Stephanie Sireix", " Min A Kim ", "Dr Smit", "Dr Talha"];
   
@@ -38,28 +34,37 @@ const StepSix = ({ validate }) => {
       },
     };
   
-    const handleButtonClick = () => {
-      setShowModal(true);
-    };
-  
-    const handleCloseModal = () => {
-      setShowModal(false);
-    };
-    const handleButtonClick1 = () => {
-      setShowModal1(true);
-    };
-  
-    const handleCloseModal1 = () => {
-      setShowModal1(false);
-    };
-  
+    const onChangeDoctor = (e) => {
+      setDoctorData(e.target.value);
+    }
+
+    const onChangeDoctorMedications = (e) => {
+        setDoctorMedicationsData(e.target.value);
+    }
+
     const handleOpenDrawer = () => {
       setIsDrawerOpen(true);
-    };
-  
+    }
+
     const handleCloseDrawer = () => {
-      setIsDrawerOpen(false);
+        setIsDrawerOpen(false);
+    }
+
+    const handleButtonClick1 = () => {
+        setShowModal1(true);
+      };
+    
+    const handleCloseModal1 = () => {
+        setShowModal1(false);
     };
+
+    const handleOpenDoctorModal = () => {
+        setDoctorModal(true);
+    }
+
+    const handleCloseDoctorModal = () => {
+      setDoctorModal(false);
+    }
   
     return (
       <div>
@@ -78,9 +83,6 @@ const StepSix = ({ validate }) => {
           and medications too.
         </p>
         <Divider my="sm" />
-        <Field validate={validate}>
-          {({ field, form }) => (
-            <>
               <Text
                 style={{
                   fontWeight: 600,
@@ -96,56 +98,18 @@ const StepSix = ({ validate }) => {
                   <span style={{ color: "red" }}>*</span>{" "}
                 </span>
               </Text>{" "}
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
-              >
-                <CustomRadio
-                  {...field}
-                  id="travel1"
-                  name="doctor"
-                  label="Yes"
-                  value="yes"
-                  required
-                  onChange={() => {
-                    form.setFieldValue("doctor", "yes");
-                    setShowTravelOptions(true);
-                  }}
-                  defaultValue={StepSix.doctor}
-                  onClick={(v) => {
-                    dispatch(setField3(true));
-                    setStepSixState({ doctor: v.target.value });
-                    console.log("yes");
-                  }}
-                />
-                <CustomRadio
-                  {...field}
-                  id="travel2"
-                  name="doctor"
-                  label="No"
-                  value="no"
-                  required
-                  onChange={() => {
-                    form.setFieldValue("doctor", "no");
-                    setShowTravelOptions(false);
-                  }}
-                  defaultValue={StepSix.doctor}
-                  onClick={(v) => {
-                    dispatch(setStepSixState({ doctor: v.target.value }));
-                    console.log(v.target.value);
-                  }}
-                />
-                {stepSix.errors?.doctor && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    {stepSix.errors?.doctor}
-                  </p>
-                )}
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+              <Form.Item label="" name="regularDoctor"
+              rules={[{ required: true, message: "Please select an option!" }]}>
+              <Radio.Group name="regularDoctor" value={doctorData} onChange={onChangeDoctor}>
+                <Radio value="Yes"> Yes </Radio>
+                <Radio value="No"> No </Radio>
+              </Radio.Group>
+              </Form.Item>
+
+
                 <TransitionGroup>
-                  {showTravelOptions && (
+                  {doctorData === "Yes" && (
                     <CSSTransition classNames="popover1" timeout={300}>
                       <Popover position="top">
                         <Text
@@ -206,50 +170,46 @@ const StepSix = ({ validate }) => {
                             color: "#fff",
                             marginTop: "10px",
                           }}
-                          onClick={handleButtonClick}
+                          onClick={handleOpenDoctorModal}
                         >
                           Enter doctors manually
                         </Button>
                         <Modal
-                          centered
-                          opened={showModal}
-                          onClose={handleCloseModal}
-                          size="xl"
-                        >
-                          <div
-                            style={{
-                              display: "flex",
-                              gap: "14px",
-                              flexDirection: "column",
-                              height: "100%",
-                            }}
-                          >
-                            <div style={{ marginBottom: "4rem" }}>
-                              <DoctorField
-                                label="Doctor's name"
-                                placeholder="Drug Name"
-                                data={data}
-                              />
-                            </div>
-                            <Button
-                              onClick={handleCloseModal}
-                              style={styles.closeButton}
-                            >
-                              Done
-                            </Button>
-                          </div>
-                        </Modal>
+                        centered
+                        opened={doctorModal}
+                        open={doctorModal}
+                        onClose={handleCloseDoctorModal}
+                        size="xl"
+                        footer={null}
+                        onCancel={handleCloseDoctorModal}
+                    >            
+            <div style={{
+                display: "flex",
+                gap: "14px",
+                flexDirection: "column",
+                height: "100%",
+            }}
+            >
+            <div style={{ marginBottom: "4rem" }}>
+                <DoctorField 
+                    label="Doctor's name"
+                    placeholder="Drug Name"
+                    data={data}
+                />
+                <Button
+                onClick={handleCloseDoctorModal}
+                style={styles.closeButton}
+                >
+                Done
+                </Button>
+            </div>
+            </div>
+                      </Modal>
                       </Popover>
                     </CSSTransition>
                   )}
                 </TransitionGroup>
-              </div>
-            </>
-          )}
-        </Field>
-  
-        <Field validate={validate}>
-          {({ field, form }) => (
+              </div>     
             <>
               <Text
                 style={{
@@ -266,59 +226,16 @@ const StepSix = ({ validate }) => {
                   <span style={{ color: "red" }}>*</span>{" "}
                 </span>
               </Text>
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: "2px" }}
-              >
-                <CustomRadio
-                  {...field}
-                  id="travel1"
-                  name="medications"
-                  label="Yes"
-                  value="yes"
-                  required
-                  onChange={() => {
-                    form.setFieldValue("medications", "yes");
-                    setShowTravelOptions1(true);
-                  }}
-                  defaultValue={StepSix.medications}
-                  onClick={(v) => {
-                    {
-                      dispatch(setField2(true));
-                      setStepSixState({ medications: v.target.value });
-                      console.log("yes");
-                    }
-                  }}
-                />
-  
-                <CustomRadio
-                  {...field}
-                  id="travel2"
-                  name="medications"
-                  label="No"
-                  value="no"
-                  required
-                  onChange={() => {
-                    form.setFieldValue("medications", "no");
-                    setShowTravelOptions1(false);
-                  }}
-                  defaultValue={StepSix.medications}
-                  onClick={(v) => {
-                    dispatch(setStepSixState({ medications: v.target.value }));
-                    console.log(v.target.value);
-                  }}
-                />
-                {stepSix.errors?.medications && (
-                  <p
-                    style={{
-                      color: "red",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    {stepSix.errors?.medications}
-                  </p>
-                )}
+              <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+              <Form.Item label="" name="prescriptionsMedications"
+                rules={[{ required: true, message: "Please select an option!" }]}>
+                <Radio.Group name="prescriptionsMedications" onChange={onChangeDoctorMedications} value={doctorMedicationsData}>
+                    <Radio value="Yes"> Yes </Radio>
+                    <Radio value="No"> No </Radio>
+                </Radio.Group>
+            </Form.Item>
                 <TransitionGroup>
-                  {showTravelOptions1 && (
+                  {doctorMedicationsData === "Yes" && (
                     <CSSTransition classNames="popover1" timeout={300}>
                       <Popover position="top">
                         <Text
@@ -413,14 +330,11 @@ const StepSix = ({ validate }) => {
                         </Modal>
                       </Popover>
                     </CSSTransition>
-                  )}
+                   )}
                 </TransitionGroup>
               </div>
             </>
-          )}
-        </Field>
   
-        {/**/}
         <Modal
           size="xl"
           centered
@@ -439,6 +353,8 @@ const StepSix = ({ validate }) => {
             padding: "20px",
           }}
           opened={isDrawerOpen}
+          footer={null}
+          onCancel={handleCloseDrawer}
           onClose={handleCloseDrawer}
           title=""
         >

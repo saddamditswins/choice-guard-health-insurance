@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface stepOne {
   Zipcode: string;
-  errors: any;
 }
 interface stepTwo {
   CompositionEvent: string;
@@ -11,17 +10,15 @@ interface stepTwo {
   PartB: string;
   GroceryCard: string;
 }
-
 interface stepThree {
   Over: string;
   Utilities: string;
   Transportation: string;
+  RoundTripTransportation: string;
   Emergency: string;
   USA: string;
-  USA1: string;
-  world: string;
+  travelOutSideUSA: string;
 }
-
 interface stepFour {
   Medicare: string;
   Medicaid: string;
@@ -34,171 +31,89 @@ interface stepFive {
   Employer: string;
   Prescription: string;
   Other: string;
-  None: string;
   NewField: string;
+  None: string;
+  Doctor: string;
+  // OptionsValue: string[];
 }
-
 interface stepSix {
-  doctor: string;
+  regularDoctor: string;
+  doctorAddress: string;
   distance: string;
   doctorname: string;
-  address: string;
-  medications: string;
-  medicinename: string;
+  selectedLocation: string;
+  prescriptionsMedications: string;
+  prescriptionName: string;
   dosage: string;
   quantity: string;
   frequency: string;
+  medications: string;
+  medicinename: string;  
 }
-
 interface stepSeven {
   preferable: string;
   network: string;
-  important: string;
 }
 
 interface IItemState {
-  field: boolean;
-  field2: boolean;
-  field3: boolean;
-  isActive: number;
-  stepOne: stepOne;
-  stepTwo: stepTwo;
-  stepThree: stepThree;
-  stepFour: stepFour;
-  stepFive: stepFive;
-  stepSix: stepSix;
-  stepSeven: stepSeven;
-  step: number;
+  stepOne: stepOne,
+  stepTwo: stepTwo,
+  stepThree: stepThree,
+  stepFour: stepFour,
+  stepFive: stepFive,
+  stepSix: stepSix,
+  stepSeven: stepSeven,
 }
 
 const initialState: IItemState = {
-  field: false,
-  field2: false,
-  field3: false,
-  step: 1,
-  isActive: 1,
-  stepOne: {
-    Zipcode: "",
-    errors: {},
-  },
-  stepTwo: {
-    CompositionEvent: "",
-    Vision: "",
-    Hearing: "",
-    PartB: "",
-    GroceryCard: "",
-  },
-  stepThree: {
-    Over: "",
-    Utilities: "",
-    Transportation: "",
-    Emergency: "",
-    USA: "",
-    USA1: "",
-    world: "",
-  },
-  stepFour: {
-    Medicare: "",
-    Medicaid: "",
-    Tricare: "",
-    chronic: "",
-  },
-  stepFive: {
-    Medicare: "",
-    Supplement: "",
-    Employer: "",
-    Prescription: "",
-    Other: "",
-    NewField: "",
-    None: "",
-  },
-  stepSix: {
-    doctor: "",
-    distance: "",
-    doctorname: "",
-    address: "",
-    medications: "",
-    medicinename: "",
-    dosage: "",
-    quantity: "",
-    frequency: "",
-  },
-  stepSeven: {
-    preferable: "",
-    network: "",
-    important: "",
-  },
+  stepOne: { Zipcode: '' },
+  stepTwo: { CompositionEvent: '', Vision: '', Hearing: '', PartB: '', GroceryCard: '' },
+  stepThree: { Over: '', Utilities: '', Transportation: '', RoundTripTransportation: '', Emergency: '', USA: '', travelOutSideUSA: '' },
+  stepFour: { Medicare: '', Medicaid: '', Tricare: '', chronic: '' },
+  stepFive: { Medicare: '', Supplement: '', Employer: '', Prescription: '', Other: '', NewField: '', None: '', Doctor: '' },
+  // stepFive: { OptionsValue: [] },
+  stepSix: { regularDoctor: '', doctorAddress: '', distance: '', doctorname: '', selectedLocation: '', prescriptionsMedications: '', prescriptionName: '', dosage: '', quantity: '', frequency: '', medications: '', medicinename: '' },
+  stepSeven: { preferable: '', network: '' },
 };
 
-const itemsSlice = createSlice({
-  name: "items",
+const formSlice = createSlice({
+  name: 'form',
   initialState,
   reducers: {
-    addItem: (state, action) => {
+    setStepOne: (state, action) => {
       state.stepOne = action.payload;
     },
-    setField: (state, action) => {
-      state.field = action.payload;
-    },
-    setField2: (state, action) => {
-      state.field2 = action.payload;
-    },
-    setField3: (state, action) => {
-      state.field3 = action.payload;
-    },
-    setStepOneState: (state, action) => {
-      state.stepOne = action.payload;
-      state.isActive = state.step;
-    },
-    setStepTwoState: (state, action) => {
+    setStepTwo: (state, action) => {
       state.stepTwo = action.payload;
-      state.isActive = state.step;
     },
-    setStepThreeState: (state, action) => {
+    setStepThree: (state, action) => {
       state.stepThree = action.payload;
-      state.isActive = state.step;
     },
-    setStepFourState: (state, action) => {
+    setStepFour: (state, action) => {
       state.stepFour = action.payload;
-      state.isActive = state.step;
     },
-    setStepFiveState: (state, action) => {
+    setStepFive: (state, action) => {
       state.stepFive = action.payload;
-      state.isActive = state.step;
     },
-    setStepSixState: (state, action) => {
+    setStepSix: (state, action) => {
       state.stepSix = action.payload;
-      state.isActive = state.step;
     },
-    setStepSevenState: (state, action) => {
+    setStepSeven: (state, action) => {
       state.stepSeven = action.payload;
-      state.isActive = state.step;
     },
-    handleSubmitNext: (state, action) => {
-      debugger
-      state.step = state.step + 1;
-    },
-    handleSubmitPrev: (state, action) => {
-      state.step = state.step - 1;
-    },
-    // add a new action to select an item
   },
 });
 
-const itemsReducer = itemsSlice.reducer;
+const itemsReducer = formSlice.reducer;
 export const {
-  setField,
-  setStepOneState,
-  handleSubmitNext,
-  handleSubmitPrev,
-  setStepTwoState,
-  setStepFourState,
-  setStepFiveState,
-  setStepThreeState,
-  setStepSixState,
-  setStepSevenState,
-  addItem,
-  setField2,
-  setField3,
-} = itemsSlice.actions;
+  setStepOne,
+  setStepTwo,
+  setStepThree,
+  setStepFour,
+  setStepFive,
+  setStepSix,
+  setStepSeven
+} = formSlice.actions;
+export const selectDisease = (state) => state;
+
 export default itemsReducer;

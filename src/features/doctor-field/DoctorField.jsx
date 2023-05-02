@@ -3,7 +3,6 @@ import CustomInput from "../custom-input/CustomInput";
 import React, { useState } from "react";
 import { FaChevronDown, FaSearch, FaTimes } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-
 import {
   Paper,
   Select,
@@ -21,6 +20,9 @@ import {
   Divider,
   Textarea,
 } from "@mantine/core";
+import StepOne from "../../components/Steps/Step1";
+import { setDoctorAddress, setDistance, setDoctorName } from "../../Redux/DoctorSlice";
+import { Form, Input, Typography } from 'antd';
 
 const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
   const [inputValue, setInputValue] = useState("");
@@ -31,10 +33,11 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [listViewData, setListViewData] = useState([]);
   const [isContentVisible, setIsContentVisible] = useState(false);
-  const { stepOne, stepSix } = useAppSelector((state) => state.item);
+  const { fieldValues } = useAppSelector((state) => state.item); 
   const dispatch = useAppDispatch();
   const handleInputChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value;    
+    dispatch(setDoctorName({ doctorname: value }));
     setInputValue(value);
     const filteredItems = data.filter((item) =>
       item.toLowerCase().includes(value.toLowerCase())
@@ -46,12 +49,15 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
     );
     if (selectedItem) {
       setSelectedItem(selectedItem);
+      dispatch(setDoctorField({ doctorname: value }));
     } else {
       setSelectedItem("");
     }
+    dispatch(setDoctorField({ doctorname: item }));
   };
 
   const handleItemClick = (item) => {
+    dispatch(setDoctorField({ doctorname: item }));
     setSelectedItem(item);
     setInputValue("");
     setFilteredData([]);
@@ -63,16 +69,19 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
     setSelectedItem(null); // remove the selected item
     setIsPrescriptionAdded(false);
   };
-  const handleAddDoctor = () => {
+  const handleAddDoctor = (e) => {
     setListViewData([...listViewData, { name: "New Provider" }]);
     setIsPrescriptionAdded(true);
     setIsContentVisible(false);
-    onAddProvider();
   };
   const handleShowContent = () => {
     setIsContentVisible(true);
     setIsPrescriptionAdded(false);
   };
+  const onChangeDoctorDistance = (value) => {
+    dispatch(setDistance({ distance: value }))
+  }
+
   return (
     <>
       <div
@@ -92,7 +101,13 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
           My Doctors
         </h2>
         <Text>Doctor's City or ZiP Code</Text>
-        <TextInput
+        <Form.Item name="doctorAddress"
+          rules={[{ required: true, message: 'Please add Doctor Address' }]}>
+        <CustomInput
+          name="doctorAddress"
+          onBlur={(e) => {
+            dispatch(setDoctorAddress({ doctorAddress:e.target.value}))
+          }}
           style={{
             borderRadius: "4px",
             fontSize: "1rem",
@@ -101,12 +116,10 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
             boxSizing: "border-box",
             maxWidth: "100%",
           }}
-          defaultValue={stepOne.Zipcode}
-
-          name="Zipcode"
           type="text"
           placeholder="Enter your Zipcode"
         />
+        </Form.Item>
         <Text
           style={{
             fontFamily: "Montserrat",
@@ -114,33 +127,38 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
         >
           Distance
         </Text>
-
-        <Autocomplete
-
-          defaultValue="25 miles"
-          placeholder="Pick one"
-          data={["5 miles", "10 miles", "15 miles", "20 miles", "25 miles"]}
-          style={{
-            marginTop: 5,
-            color: "#969799",
-            fontFamily: "Montserrat",
-          }}
-        />
+        <Form.Item name="distance"
+          rules={[{ required: true, message: 'Please add Doctor Distance' }]}>
+          <Autocomplete
+            defaultValue="25 miles"
+            name="distance"
+            placeholder="Pick one"
+            data={["5 miles", "10 miles", "15 miles", "20 miles", "25 miles"]}
+            style={{
+              marginTop: 5,
+              color: "#969799",
+              fontFamily: "Montserrat",
+            }}
+            onChange={onChangeDoctorDistance}
+          />
+        </Form.Item>
         <Text style={{ marginTop: 15 }}> Doctor's name</Text>
-
-        <TextInput
+        <Form.Item name="doctorname"
+          rules={[{ required: true, message: 'Please add Doctor Name' }]}>
+        <CustomInput
           style={{
             marginTop: 5,
             color: "#495057",
-
             fontFamily: "Montserrat",
           }}
+          name="doctorname"
           type="text"
           id="autocomplete"
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
         />
+        </Form.Item>
         <div
           style={{
             marginTop: "1em",
@@ -153,7 +171,6 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
             <div
               style={{
                 color: "#495057",
-
                 fontFamily: "Montserrat",
               }}
             >
@@ -161,7 +178,6 @@ const DoctorField = ({ label, placeholder, data, onAddProvider }) => {
                 {isPrescriptionAdded ? (
                   <div>
                     <div>
-
                       <Text
                         bold
                         style={{

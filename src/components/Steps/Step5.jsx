@@ -1,102 +1,62 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../Redux/store";
-import { setStepFiveState } from "../../Redux/itemsSlice";
 import { MultiSelect, Text, TextInput } from "@mantine/core";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import CustomInput from "../../features/custom-input/CustomInput";
+import CustomRadio from "../../features/custom-radio/CustomRadio";
+import CustomSelect from "../../features/custom-select/CustomSelect";
+import { Form, Input, Select, Typography } from 'antd';
 
-const StepFive = ({ validate, chronic }) => {
-    const { field, stepFour } = useAppSelector((state) => state.item);
-    const dispatch = useAppDispatch();
-  
-    const [selectedItems, setSelectedItems] = useState([]);
-  
-    const handleSelection = (selected) => {
-      if (selected.includes("None")) {
-        setSelectedItems([]);
-      } else {
-        const newSelection = selected.filter(
-          (item) => !selectedItems.includes(item)
-        );
-        const removedItems = selectedItems.filter(
-          (item) => !selected.includes(item)
-        );
-        setSelectedItems([...selectedItems, ...newSelection]);
-        removedItems.forEach((item) =>
-          setSelectedItems((prevState) =>
-            prevState.filter((prevItem) => prevItem !== item)
-          )
-        );
-      }
-    };
+const StepFive = ({ validate, chronic, planType, setPlanType }) => {
+    const { stepFive, field } = useAppSelector((state) => state.item);
 
+    const { Option } = Select;
+    const options = [
+        { value: "medicare", label: "Medicare" },
+        { value: "supplement", label: "Supplement" },
+        { value: "employer", label: "Employer" },
+        { value: "prescription", label: "Prescription" },
+        { value: "other", label: "Other" },
+        { value: "newField", label: "NewField" },
+        { value: "none", label: "None" },
+        { value: "doctor", label: "Doctor" },
+  ];
     
-    return (
-      <div className="div-height">
-        {field && (
-          <>
-            <Text
-              // style={{
-              //   fontFamily: "Montserrat, sans-serif",
-              //   marginBottom: "8px",
-              //   fontWeight: "600",
-              //   background: "transparent",
-              //   fontSize: "16px",
-              // }}
-            >
-              Which of the following chronic health conditions do you have?
-            </Text>
-            <MultiSelect
-              style={{ marginBottom: "20px" }}
-              data={[
-                {
-                  value: "Medicare Advantage Part C",
-                  label: "Medicare Advantage Part C",
-                },
-                { value: "Medicare Supplement", label: "Medicare Supplement" },
-                {
-                  value: "Employer/Union Coverage",
-                  label: "Employer/Union Coverage",
-                },
-                {
-                  value: "Stand Alone Prescription Drug Plan",
-                  label: "Stand Alone Prescription Drug Plan",
-                },
-                { value: "Other", label: "Other" },
-              ]}
-            />{" "}
-            {StepFive.errors?.Plan && (
-              <p style={{ color: "red", fontStyle: "italic" }}>
-                {StepFive.errors?.Plan}
-              </p>
-            )}
-          </>
-        )}
-        {chronic === "yes" && (
-          <div>
-            <Text
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                marginBottom: "8px",
-                fontWeight: "600",
-                background: "transparent",
-                fontSize: "16px",
-              }}
-            >
-              <span>
-                New Field(s): <span style={{ color: "red" }}>*</span>{" "}
-              </span>
-            </Text>
-            <div>
-              {/* MultiSelect component */}
-              {/* TextInput component */}
-            </div>
-          </div>
-        )}
+    const [ medicare, setMedicare ] = useState(false);
+    const [ supplement, setSupplement ] = useState(false);
+    const [ employer, setEmployer ] = useState(false);
+    const [ prescription, setPrescription ] = useState(false);
+    const [ other, setOther ] = useState(false);
+    const [ newField, setNewField ] = useState(false);
+    const [ none, setNone ] = useState(false);
+    const [ doctor, setDoctor ] = useState(false);
+    
+    const onChangePlanType = (e) => {
+        if(e.includes("None")){
+            setPlanType([]);
+        } else {
+            const newSelection = e.filter(
+                (item) => !planType.includes(item)
+            )
+            const removedItems = planType.filter(
+                (item) => !e.includes(item)
+            )
+            setPlanType([...planType , ...newSelection]);
+            removedItems.forEach((item) => 
+                setPlanType((prevState) => 
+                  prevState.filter((prevItem) => prevItem !== item)
+              )
+            );
+        }
+        
+    }
   
+
+    return (
+      <>
         <Text
           style={{
             fontFamily: "Montserrat, sans-serif",
-            marginBottom: "8px",
             fontWeight: "600",
             background: "transparent",
             fontSize: "16px",
@@ -107,79 +67,77 @@ const StepFive = ({ validate, chronic }) => {
             <span style={{ color: "red" }}>*</span>{" "}
           </span>
         </Text>
-        <div>
-          <MultiSelect
-            style={{
-              marginTop: "10px",
-              marginBottom: "10px"
-            }}
-            data={[
-              { value: "None", label: "None" },
-              {
-                value: "Medicare Advantage Part C",
-                label: "Medicare Advantage Part C",
-              },
-              { value: "Medicare Supplement", label: "Medicare Supplement" },
-              {
-                value: "Employer/Union Coverage",
-                label: "Employer/Union Coverage",
-              },
-              {
-                value: "Stand Alone Prescription Drug Plan",
-                label: "Stand Alone Prescription Drug Plan",
-              },
-              { value: "Other", label: "Other" },
-  
-            ]}
-            placeholder="Select from the following list"
-            limit={3}
-            value={selectedItems}
-            onChange={(selected) => handleSelection(selected)}
-          />
-          <TransitionGroup>
-            {selectedItems.map((item) => {
-              if (item.value === "None") {
-                return null;
+        <Form.Item name="planType"
+          rules={[{ required: true, message: 'Please select Atleast One Value' }]}>
+         <MultiSelect
+              name="planType"
+              style={{ marginBottom: "20px" }}
+              data={[
+                {
+                  value: "Diabities",
+                  label: "Diabities",
+                },
+                { 
+                  value: "Cardiovascular Disease", 
+                  label: "Cardiovascular Disease"
+                },
+                {
+                  value: "Congestive Heart Failure",
+                  label: "Congestive Heart Failure",
+                },
+                {
+                  value: "Cancer",
+                  label: "Cancer",
+                },
+                { 
+                  value: "Autoimmune disorder",
+                 label: "Autoimmune disorder" 
+                },
+                { 
+                  value: "ESRD",
+                  label: "ESRD" 
+                },
+                { 
+                  value: "Dementia",
+                 label: "Dementia" 
+                },
+                { 
+                  value: "Other",
+                 label: "Other" 
+                },
+                { 
+                  value: "Cardiovascular Disease",
+                 label: "Cardiovascular Disease" 
+                },
+              ]}
+              placeholder="Select from the following list"
+              onChange={(e) => onChangePlanType(e)}
+            />
+          {planType.map((item) => {
+              if(item === "None"){
+                  return null;
               }
               return (
-                <CSSTransition classNames="popover" timeout={300}>
-                  <div key={item}>
-                    <Text
-                      style={{
-                        marginTop: "10px",
-                        fontFamily: "Montserrat, sans-serif",
-                        fontWeight: "600",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Please select an option for {item}:
-                    </Text>
-                    <TextInput
-                      size="md"
-                      style={{
-                        marginLeft: "-2px",
-                        borderRadius: "4px",
-                        width: "100%",
-                        fontSize: "16px",
-                        color: "#333",
-                      }}
+                  <div key={item} className="mb-1">
+                      <Text className="text-box">
+                          <span>Please select an option for {item}:</span>
+                      </Text>
+                      <TextInput
                       name={`Option for ${item}`}
                       type="text"
                       validate={validate}
                       placeholder={`Enter option for ${item}`}
-                      onChange={(v) => {
-                        dispatch(setStepFiveState({ Zipcode: v.target.value }));
-                      }}
-                    />
+                      // onBlur={(v) => {
+                      //   dispatch(handleSubmitNext({ Zipcode: v.target.value }));
+                      // }}
+                      />
                   </div>
-                </CSSTransition>
-              );
-            })}
-  
-          </TransitionGroup>
-        </div>
-      </div>
-    );   
+              )
+          })
+          }
+      </Form.Item>
+      </>
+    );  
   };
 
   export default StepFive;

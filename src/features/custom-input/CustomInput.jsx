@@ -3,7 +3,7 @@ import { TextInput } from "@mantine/core";
 import { useField } from "formik";
 
 const CustomInput = ({ label, onTextChange, ...props }) => {
-  const [field, meta] = useField(props);
+  // const [field, meta] = useField(props);
 
   return (
     <>
@@ -16,16 +16,16 @@ const CustomInput = ({ label, onTextChange, ...props }) => {
           borderColor: "#ced4da",
           borderRadius: "4px",
           fontSize: "1rem",
-          borderColor: "#ced4da",
+          // borderColor: "#ced4da",
           width: "100%",
           boxSizing: "border-box",
           fontSize: "16px",
           maxWidth: "100%",
         }}
-        {...field}
+        // {...field}
 
         {...props}
-        className={`input-with-placeholder ${meta.touched && meta.error ? "input-error" : ""}`}
+        // className={`input-with-placeholder ${meta.touched && meta.error ? "input-error" : ""}`}
 
       />
 

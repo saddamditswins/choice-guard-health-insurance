@@ -1,3 +1,4 @@
+import doctorReducer from "./DoctorSlice";
 import PrescriptionReducer from "./PrescriptionSlice";
 import itemsReducer from "./itemsSlice";
 import { configureStore } from "@reduxjs/toolkit";
@@ -7,6 +8,7 @@ export const store = configureStore({
   reducer: {
     item: itemsReducer,
     Prescription: PrescriptionReducer,
+    Doctor: doctorReducer
   },
 });
 

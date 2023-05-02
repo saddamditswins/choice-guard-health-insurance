@@ -3,7 +3,6 @@ import { useField } from "formik";
 
 const CustomRadio = ({ label, ...props }) => {
   const [field, meta] = useField(props);
-
   return (
     <label style={{ display: "flex", alignItems: "center" }}>
       <input

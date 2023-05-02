@@ -15,11 +15,13 @@
     "@mantine/form": "^5.10.5",
     "@mantine/hooks": "^5.10.5",
     "@reduxjs/toolkit": "^1.9.3",
+    "antd": "^5.4.6",
     "formik": "^2.2.9",
     "framer-motion": "^10.0.1",
     "react": "^18.2.0",
     "react-animated-slider": "^1.1.4",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
@@ -27,7 +29,7 @@
     "react-transition-group": "^4.4.5",
     "styled-components": "^5.3.8",
     "typeface-montserrat": "^1.1.13",
-    "yup": "^1.0.2"
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
