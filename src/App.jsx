@@ -45,7 +45,7 @@ import {
   NumberInput
 } from "@mantine/core";
 import { useState } from "react";
-import {  message, Steps, Layout, Form } from 'antd';
+import {  message, Steps, Progress, Layout, Form } from 'antd';
 
 
 const App = () => {
@@ -77,7 +77,7 @@ const App = () => {
   });
 
   const next = async () => {
-    if(await form.validateFields()){
+    if(await form.validateFields() && current < totalSteps - 1){
       setCurrent(current + 1);  
     }
     const values = form.getFieldsValue(true);
@@ -116,7 +116,9 @@ const App = () => {
   };
 
   const prev = () => {
-    setCurrent(current - 1);
+    if(current > 0){
+      setCurrent(current - 1);
+    }
   };
 
   const doneStepper = async () => {
@@ -160,6 +162,9 @@ const App = () => {
     }
   ];
 
+  const totalSteps = steps.length;
+  const progressPercent = ((current + 1) / totalSteps) * 100;
+
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
@@ -176,8 +181,8 @@ const App = () => {
         // onFinish={onFinish}
         // onFinishFailed={onFinishFailed}
         autoComplete="off"
-      >
-     <Steps current={current} items={items} />
+      > 
+     <Progress percent={progressPercent} showInfo={false} strokeColor="#52c41a" />        
         <div className="steps-content">{steps[current].content}</div>
         <div className="steps-action">
           {current > 0 && (
